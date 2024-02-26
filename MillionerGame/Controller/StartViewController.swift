@@ -15,10 +15,12 @@ class StartViewController: UIViewController {
         super.viewDidLoad()
         view = mainView
         
+     
         rules()
         start()
         
     }
+    
     func rules() {
         let tap = UIAction { _ in
             print("переход в правила")
