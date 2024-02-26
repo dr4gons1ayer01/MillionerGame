@@ -81,3 +81,4 @@ class ResultView: UIView, UITableViewDataSource {
     }
     
 }
+

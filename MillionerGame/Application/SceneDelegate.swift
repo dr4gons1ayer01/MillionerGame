@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         let navVC = UINavigationController(rootViewController: StartViewController())
-        window?.rootViewController = navVC
+        window?.rootViewController = navVC       //ResultViewController(questionNumber: 3, isCorrectAnswer: true)
         window?.makeKeyAndVisible()
     }
 
