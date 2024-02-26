@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5353F08D2B8CFB5B0088050A /* Rules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5353F08C2B8CFB5B0088050A /* Rules.swift */; };
 		BE0DCDD62B8B687D00249D2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCDD52B8B687D00249D2E /* AppDelegate.swift */; };
 		BE0DCDD82B8B687D00249D2E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCDD72B8B687D00249D2E /* SceneDelegate.swift */; };
 		BE0DCDDA2B8B687D00249D2E /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCDD92B8B687D00249D2E /* StartViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5353F08C2B8CFB5B0088050A /* Rules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rules.swift; sourceTree = "<group>"; };
 		BE0DCDD22B8B687D00249D2E /* MillionerGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MillionerGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE0DCDD52B8B687D00249D2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE0DCDD72B8B687D00249D2E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			children = (
 				BE0DCDF02B8B6A8E00249D2E /* Question.swift */,
 				BE0DCE1C2B8BD2CF00249D2E /* Answer.swift */,
+				5353F08C2B8CFB5B0088050A /* Rules.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				BE0DCDD62B8B687D00249D2E /* AppDelegate.swift in Sources */,
 				BE0DCE1D2B8BD2CF00249D2E /* Answer.swift in Sources */,
 				BE0DCDD82B8B687D00249D2E /* SceneDelegate.swift in Sources */,
+				5353F08D2B8CFB5B0088050A /* Rules.swift in Sources */,
 				BE0DCE0D2B8BBD0D00249D2E /* QuestionViewController.swift in Sources */,
 				BE0DCE132B8BBD8A00249D2E /* ResultViewController.swift in Sources */,
 				BE0DCE0F2B8BBD1400249D2E /* QuestionView.swift in Sources */,

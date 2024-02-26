@@ -6,3 +6,4 @@
 //
 
 import Foundation
+//тут будут правила
