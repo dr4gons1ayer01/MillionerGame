@@ -1,0 +1,80 @@
+//
+//  ResultTableViewCell.swift
+//  MillionerGame
+//
+//  Created by Мария Нестерова on 27.02.2024.
+//
+
+import UIKit
+
+class ResultTableViewCell: UITableViewCell {
+    
+    private let background = UIImageView()
+    private let questionLabel = UILabel()
+    private let sumLabel = UILabel()
+    
+    func setupUI(cellTotal: Int, questionNumber: Int, rowNumber: Int, isCorrect: Bool, isMilestoneSum: Bool, sum: String) {
+        
+        isUserInteractionEnabled = false
+        
+        background.contentMode = .scaleAspectFill
+        
+        questionLabel.font = UIFont(name: "Gilroy-Regular", size: 20)
+        questionLabel.textColor = .white
+        questionLabel.textAlignment = .left
+        questionLabel.text = "Вопрос " + String(cellTotal - rowNumber)
+        
+        sumLabel.font = UIFont(name: "Gilroy-Regular", size: 20)
+        sumLabel.textColor = .white
+        sumLabel.textAlignment = .right
+        sumLabel.text = sum
+        
+        background.image = calculateBackground(rowNumber: rowNumber, isMilestoneSum: isMilestoneSum)
+        if (cellTotal - 1) - questionNumber == rowNumber {
+            background.image = highlightQuestion(isCorrect: isCorrect)
+        }
+        background.clipsToBounds = true
+        
+        contentView.addSubview(background)
+        contentView.addSubview(questionLabel)
+        contentView.addSubview(sumLabel)
+        contentView.subviews.forEach({$0.translatesAutoresizingMaskIntoConstraints = false})
+        backgroundColor = .clear
+        
+        NSLayoutConstraint.activate([
+            background.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 4),
+            background.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            background.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            background.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -4),
+            questionLabel.leadingAnchor.constraint(equalTo: background.leadingAnchor, constant: 20),
+            questionLabel.trailingAnchor.constraint(equalTo: background.centerXAnchor),
+            questionLabel.centerYAnchor.constraint(equalTo: background.centerYAnchor),
+            sumLabel.leadingAnchor.constraint(equalTo: background.centerXAnchor),
+            sumLabel.trailingAnchor.constraint(equalTo: background.trailingAnchor, constant: -20),
+            sumLabel.centerYAnchor.constraint(equalTo: background.centerYAnchor)
+        ])
+        
+        
+    }
+    
+    private func calculateBackground(rowNumber: Int, isMilestoneSum: Bool) -> UIImage {
+        
+        if rowNumber == 0 {
+            return UIImage(imageLiteralResourceName: "Rectangle 4")
+        } else if isMilestoneSum {
+            return UIImage(imageLiteralResourceName: "Rectangle 1")
+        } else {
+            return UIImage(imageLiteralResourceName: "Rectangle 2")
+        }
+        
+    }
+    
+    private func highlightQuestion(isCorrect: Bool) -> UIImage {
+        
+        if isCorrect {
+            return UIImage(imageLiteralResourceName: "Rectangle 3")
+        } else {
+            return UIImage(imageLiteralResourceName: "Rectangle 5")
+        }
+    }
+}
