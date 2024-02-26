@@ -8,7 +8,10 @@
 import UIKit
 
 class RulesView: UIView {
-    let label = UILabel()
+    let backgroundImage = UIImageView(image: UIImage(named: "bg")!)
+    let logoLabel = UILabel()
+    let rulesLabel = UITextView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+    let homeButton = UIButton(title: "Назад", bg: .systemGreen)
     
     init() {
         super.init(frame: CGRect())
@@ -16,15 +19,41 @@ class RulesView: UIView {
         
     }
     func setupUI() {
-        backgroundColor = .white
-        label.text = "Правила"
+        backgroundImage.contentMode = .scaleAspectFill
         
-        addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        logoLabel.text = "Правила игры"
+        logoLabel.font = UIFont(name: "Gilroy-Bold", size: 35)
+        logoLabel.textColor = .white
+        logoLabel.textAlignment = .center
+        
+        rulesLabel.isScrollEnabled = true
+        rulesLabel.text = "тут правила я их позже добавлю в отдельный файл"
+        rulesLabel.font = UIFont(name: "Gilroy-Bold", size: 15)
+        rulesLabel.backgroundColor = .clear
+        rulesLabel.textColor = .white
+        rulesLabel.textAlignment = .center
+        rulesLabel.isEditable = false
+        
+        let stack = UIStackView(arrangedSubviews: [logoLabel, rulesLabel, homeButton])
+        stack.axis = .vertical
+        stack.spacing = 3
+        
+        
+        addSubview(backgroundImage)
+        addSubview(stack)
+        backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+        stack.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: centerYAnchor),
+            backgroundImage.topAnchor.constraint(equalTo: topAnchor),
+            backgroundImage.centerXAnchor.constraint(equalTo: centerXAnchor),
+            backgroundImage.leadingAnchor.constraint(equalTo: leadingAnchor),
+            backgroundImage.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            stack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0),
+            stack.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            stack.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            stack.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0)
         ])
         
     }
@@ -32,6 +61,9 @@ class RulesView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+
+
 import SwiftUI
 
 struct RulesViewProvider: PreviewProvider {
