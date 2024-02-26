@@ -33,6 +33,7 @@
 		BE0DCE192B8BC1A800249D2E /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE182B8BC1A800249D2E /* RulesViewController.swift */; };
 		BE0DCE1B2B8BC1B300249D2E /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE1A2B8BC1B300249D2E /* RulesView.swift */; };
 		BE0DCE1D2B8BD2CF00249D2E /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE1C2B8BD2CF00249D2E /* Answer.swift */; };
+		CBCD61852B8D3E49005C8F54 /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCD61842B8D3E49005C8F54 /* ResultTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		BE0DCE182B8BC1A800249D2E /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		BE0DCE1A2B8BC1B300249D2E /* RulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesView.swift; sourceTree = "<group>"; };
 		BE0DCE1C2B8BD2CF00249D2E /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
+		CBCD61842B8D3E49005C8F54 /* ResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 				BE0DCE1A2B8BC1B300249D2E /* RulesView.swift */,
 				BE0DCE0A2B8BBCE000249D2E /* GameView.swift */,
 				BE0DCE102B8BBD7900249D2E /* ResultView.swift */,
+				CBCD61842B8D3E49005C8F54 /* ResultTableViewCell.swift */,
 				BE0DCE0E2B8BBD1400249D2E /* QuestionView.swift */,
 				BE0DCE162B8BBE4A00249D2E /* GameOverView.swift */,
 			);
@@ -273,6 +276,7 @@
 				BE0DCE0D2B8BBD0D00249D2E /* QuestionViewController.swift in Sources */,
 				BE0DCE132B8BBD8A00249D2E /* ResultViewController.swift in Sources */,
 				BE0DCE0F2B8BBD1400249D2E /* QuestionView.swift in Sources */,
+				CBCD61852B8D3E49005C8F54 /* ResultTableViewCell.swift in Sources */,
 				BE0DCE1B2B8BC1B300249D2E /* RulesView.swift in Sources */,
 				BE0DCE112B8BBD7900249D2E /* ResultView.swift in Sources */,
 				BE0DCE152B8BBE4100249D2E /* GameOverViewController.swift in Sources */,
