@@ -9,11 +9,16 @@ import UIKit
 
 class GameViewController: UIViewController {
     let mainView = GameView()
+    let quiz = Quiz()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mainView
- 
+        
+        
     }
-    
+    func updateUI() {
+        
+        
+    }
 }

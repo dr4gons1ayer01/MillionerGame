@@ -8,6 +8,7 @@
 import Foundation
 
 struct Quiz {
+    var numQuestions = 0
     let questions: [Question]
     
     init() {
