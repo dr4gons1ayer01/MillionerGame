@@ -8,12 +8,19 @@
 import UIKit
 
 class ResultView: UIView, UITableViewDataSource {
+    
+    ///Переход на другой экран по закрытию экрана с результатами в зависимости от правильности ответа
+    var nextVC: ((_ milestone: String?) -> Void)?
 
     private let questionNumber: Int
     private let isCorrectAnswer: Bool
     
+    ///Все суммы возможного выигрыша
     private let sums = ["100 RUB", "200 RUB", "300 RUB", "500 RUB", "1000 RUB", "2000 RUB", "4000 RUB", "8000 RUB", "16000 RUB", "32000 RUB", "64000 RUB", "125000 RUB", "250000 RUB", "500000 RUB", "1 миллион"]
+    ///Несгораемые суммы возможного выигрыша
     private let milestoneSums = ["1000 RUB", "32000 RUB", "1 миллион"]
+    ///Хранит последнюю несгораемую сумму, если она была достигнута
+    private static var lastMilestone: String?
     
     private let background = UIImageView()
     private let logo = UIImageView()
@@ -23,9 +30,22 @@ class ResultView: UIView, UITableViewDataSource {
         self.questionNumber = questionNumber
         self.isCorrectAnswer = isCorrectAnswer
         super.init(frame: .zero)
+        //Сохраняем несгораемую сумму, если она была достигнута
+        if milestoneSums.contains(sums[questionNumber]) && isCorrectAnswer {
+            ResultView.lastMilestone = sums[questionNumber]
+        }
         setupUI()
+        
+        //Тут пока временно сделала автоматическое закрытие экрана результатов и перехода на следующий экран через 4секунды после появления экрана результатов
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [weak self] in
+            //Передаем в замыкание выхода с экрана результатов последнюю достигнутую несгораемую сумму, если она была достигнута. Для ее дальнейшей передачи и отображения на экране 'Game Over'
+            self?.nextVC?(ResultView.lastMilestone)
+        }
     }
-    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        tableView.rowHeight = tableView.bounds.height / CGFloat(tableView.numberOfRows(inSection: 0))
+    }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -40,9 +60,6 @@ class ResultView: UIView, UITableViewDataSource {
         tableView.register(ResultTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
         tableView.backgroundColor = .clear
-        tableView.rowHeight = 42
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.estimatedRowHeight = 42
         
         addSubview(background)
         addSubview(logo)
@@ -73,11 +90,16 @@ class ResultView: UIView, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ResultTableViewCell
         let isMilestone: Bool = {
-            milestoneSums.contains(sums[indexPath.row])
+            milestoneSums.contains(sums.reversed()[indexPath.row])
         }()
-        cell.setupUI(cellTotal: sums.count, questionNumber: questionNumber, rowNumber: indexPath.row, isCorrect: isCorrectAnswer, isMilestoneSum: isMilestone, sum: sums[sums.count - (indexPath.row + 1)])
+        cell.setupUI(cellTotal: sums.count, questionNumber: questionNumber, rowNumber: indexPath.row, isCorrect: isCorrectAnswer, isMilestoneSum: isMilestone, sum: sums.reversed()[indexPath.row])
         
         return cell
+    }
+    
+    ///Сбрасывает хранимую несгораемую сумму для начала новой игры
+    func restartResults() {
+        ResultView.lastMilestone = nil
     }
     
 }
