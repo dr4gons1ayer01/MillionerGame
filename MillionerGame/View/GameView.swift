@@ -18,6 +18,8 @@ class GameView: UIView {
     let questionTextLabel = UILabel(text: "Which team of the first challenge is the best in this stream?")
     let sumTotalLabel = UILabel(text: "100 RUB")
     
+    let timerProgress = UIProgressView()
+    
     let help5050Button = UIButton(type: .system)
     let helpPhoneButton = UIButton(type: .system)
     let helpHumansButton = UIButton(type: .system)
@@ -39,12 +41,19 @@ class GameView: UIView {
     
     func setupUI() {
         
-        takeMoneyButton.setImage(UIImage(systemName: "sos"), for: .normal)
+        takeMoneyButton.setImage(UIImage(systemName: "dollarsign.circle"), for: .normal)
         exitButton.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
         
-        help5050Button.setImage(UIImage(named: "help5050"), for: .normal)
-        helpPhoneButton.setImage(UIImage(named: "helpPhone"), for: .normal)
-        helpHumansButton.setImage(UIImage(named: "helpHumans"), for: .normal)
+        timerProgress.layer.cornerRadius = 5
+        timerProgress.layer.borderWidth = 2
+        timerProgress.layer.borderColor = UIColor.white.cgColor
+        timerProgress.trackTintColor = .systemGray
+        timerProgress.progressTintColor = .systemCyan
+        timerProgress.heightAnchor.constraint(equalToConstant: 13).isActive = true
+        
+        help5050Button.setImage(UIImage(systemName: "50.circle"), for: .normal)
+        helpPhoneButton.setImage(UIImage(systemName: "phone"), for: .normal)
+        helpHumansButton.setImage(UIImage(systemName: "person.3.fill"), for: .normal)
         
         let topStack = UIStackView(views: [exitButton,
                                            questionNumberLabel,
@@ -57,7 +66,8 @@ class GameView: UIView {
                                                        helpHumansButton], 
                                                axis: .horizontal,
                                                spacing: 20)
-
+        
+        
         let answersButtonsStack = UIStackView(views: [buttonAnswerA,
                                                           buttonAnswerB,
                                                           buttonAnswerC,
@@ -67,6 +77,7 @@ class GameView: UIView {
         
         let mainStack = UIStackView(views: [topStack,
                                                 sumTotalLabel,
+                                                timerProgress,
                                                 questionTextLabel,
                                                 helpButtonsStackView,
                                                 answersButtonsStack],
@@ -74,7 +85,9 @@ class GameView: UIView {
                                         spacing: 10)
         addSubview(backgroundImage)
         addSubview(mainStack)
+        
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
+        mainStack.distribution = .equalSpacing
         mainStack.translatesAutoresizingMaskIntoConstraints = false
 
         // MARK: - Constraints
@@ -86,11 +99,18 @@ class GameView: UIView {
             backgroundImage.trailingAnchor.constraint(equalTo: trailingAnchor),
             backgroundImage.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            mainStack.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor, constant: 10),
+            mainStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
             mainStack.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
             mainStack.centerXAnchor.constraint(equalTo: centerXAnchor),
             
-            questionTextLabel.heightAnchor.constraint(equalToConstant: 300),
+            timerProgress.topAnchor.constraint(equalTo: sumTotalLabel.bottomAnchor, constant: 20),
+            timerProgress.leadingAnchor.constraint(equalTo: mainStack.leadingAnchor),
+            timerProgress.trailingAnchor.constraint(equalTo: mainStack.trailingAnchor),
+          
+            questionTextLabel.heightAnchor.constraint(equalToConstant: 200),
+            
+            
+        
         ])
         
 

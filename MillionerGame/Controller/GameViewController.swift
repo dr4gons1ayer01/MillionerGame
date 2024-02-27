@@ -27,36 +27,33 @@ class GameViewController: UIViewController {
         super.viewDidLoad()
         view = mainView
         
-        updateUI()
+        setupUI()
+        answerButtonsTapped()
         playSound(soundFileName: "zvukChasov")
         exitButtonTapped()
         takeMoneyButtonTapped()
     }
-    func updateUI() {
-        let currentQuestion = quiz.questions[quiz.numQuestions]
-        mainView.questionTextLabel.text = currentQuestion.questionText
-        mainView.buttonAnswerA.setTitle("A: \(currentQuestion.answers[0].text)", for: .normal)
-        mainView.buttonAnswerB.setTitle("B: \(currentQuestion.answers[1].text)", for: .normal)
-        mainView.buttonAnswerC.setTitle("C: \(currentQuestion.answers[2].text)", for: .normal)
-        mainView.buttonAnswerD.setTitle("D: \(currentQuestion.answers[3].text)", for: .normal)
-        
+    
+    func setupUI() {
+        mainView.questionTextLabel.text = quiz.getQuestion()
+        mainView.buttonAnswerA.setTitle(quiz.getAnswers()[0], for: .normal)
+        mainView.buttonAnswerB.setTitle(quiz.getAnswers()[1], for: .normal)
+        mainView.buttonAnswerC.setTitle(quiz.getAnswers()[2], for: .normal)
+        mainView.buttonAnswerD.setTitle(quiz.getAnswers()[3], for: .normal)
+      
     }
-    //TODO: - прописать обработчики кнопок
-    func checkAnswer(_ selectedAnswerIndex: Int) {
-        let currentQuestion = quiz.questions[quiz.numQuestions]
-        if selectedAnswerIndex == currentQuestion.correctAnswerIndex {
-            print("Верный ответ!")
-            
-        } else {
-            print("Неверный ответ!")
-            
+    
+    func answerButtonsTapped() {
+        let tap = UIAction { action in
+            if let button = action.sender as? UIButton {
+                if button.setTitle(quiz.getCorrectAnswer(), for: .normal) == 
+            }
         }
+        mainView.buttonAnswerA.addAction(tap, for: .touchUpInside)
+        mainView.buttonAnswerB.addAction(tap, for: .touchUpInside)
+        mainView.buttonAnswerC.addAction(tap, for: .touchUpInside)
+        mainView.buttonAnswerD.addAction(tap, for: .touchUpInside)
     }
-    //TODO: - прописать обработчики кнопок
-    
-    
-    
-    
     
     func exitButtonTapped() {
         let tap = UIAction { _ in
@@ -99,3 +96,5 @@ class GameViewController: UIViewController {
         
     }
 }
+
+    
