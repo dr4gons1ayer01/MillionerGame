@@ -18,6 +18,11 @@ class ResultTableViewCell: UITableViewCell {
         isUserInteractionEnabled = false
         
         background.contentMode = .scaleAspectFill
+        background.image = calculateBackground(rowNumber: rowNumber, isMilestoneSum: isMilestoneSum)
+        if (cellTotal - 1) - questionNumber == rowNumber {
+            background.image = highlightQuestion(isCorrect: isCorrect)
+        }
+        background.clipsToBounds = true
         
         questionLabel.font = UIFont(name: "Gilroy-Regular", size: 20)
         questionLabel.textColor = .white
@@ -28,12 +33,6 @@ class ResultTableViewCell: UITableViewCell {
         sumLabel.textColor = .white
         sumLabel.textAlignment = .right
         sumLabel.text = sum
-        
-        background.image = calculateBackground(rowNumber: rowNumber, isMilestoneSum: isMilestoneSum)
-        if (cellTotal - 1) - questionNumber == rowNumber {
-            background.image = highlightQuestion(isCorrect: isCorrect)
-        }
-        background.clipsToBounds = true
         
         contentView.addSubview(background)
         contentView.addSubview(questionLabel)
@@ -56,7 +55,7 @@ class ResultTableViewCell: UITableViewCell {
         
         
     }
-    
+    ///Возвращает свой цвет для каждой ячейки в таблице результатов
     private func calculateBackground(rowNumber: Int, isMilestoneSum: Bool) -> UIImage {
         
         if rowNumber == 0 {
@@ -69,6 +68,7 @@ class ResultTableViewCell: UITableViewCell {
         
     }
     
+    ///Подсвечивает ячейку с текущим вопросом верно/неверно
     private func highlightQuestion(isCorrect: Bool) -> UIImage {
         
         if isCorrect {
