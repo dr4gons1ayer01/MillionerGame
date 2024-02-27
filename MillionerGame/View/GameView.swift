@@ -139,16 +139,6 @@ extension UIButton {
     }
 }
 
-//extension UIImageView {
-//    convenience init(name: String) {
-//        self.init()
-//        self.image = UIImage(named: name)
-//        self.contentMode = .scaleAspectFit
-//        self.isUserInteractionEnabled = true
-//        self.translatesAutoresizingMaskIntoConstraints = false
-//    }
-//}
-
 // MARK: - UI Build
 
 import SwiftUI

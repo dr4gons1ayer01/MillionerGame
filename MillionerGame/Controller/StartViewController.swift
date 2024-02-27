@@ -15,7 +15,6 @@ class StartViewController: UIViewController {
         super.viewDidLoad()
         view = mainView
         
-     
         rules()
         start()
         
@@ -37,6 +36,7 @@ class StartViewController: UIViewController {
             
             let vc = GameViewController()
             self.navigationController?.pushViewController(vc, animated: true)
+
         }
         mainView.startButton.addAction(tap, for: .touchUpInside)
     }
