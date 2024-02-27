@@ -35,6 +35,24 @@ struct Quiz {
         
         self.questions = [question1, question2, question3, question4, question5, question6, question7, question8, question9, question10]
     }
+    
+    
+    func getQuestion() -> String {
+        questions[numQuestions].questionText
+    }
+    
+    func getAnswers() -> [String] {
+        questions[numQuestions].answers.map { $0.text }
+    }
+    
+//    func getCorrectAnswer() -> Int {
+//        questions[numQuestions].correctAnswerIndex
+//    }
+    
+    func checkAnswer(_ answer: Int) -> Bool {
+        answer == questions[numQuestions].correctAnswerIndex
+    }
+    
 }
 
 
