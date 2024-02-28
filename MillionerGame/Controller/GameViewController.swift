@@ -10,7 +10,7 @@ import AVFoundation
 
 class GameViewController: UIViewController {
     let mainView = GameView()
-    let quiz = Quiz()
+    var quiz = Quiz()
     var player: AVAudioPlayer!
     var countdownTimer: Timer?      //время обратного отсчета
     var reminingTime: Int = 0       //оставшееся время
@@ -21,13 +21,17 @@ class GameViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        //вот это перенесла из viewDidLoad сюда, чтобы вопросы обновлялись после возврата с экрана с таблицей со всеми вопросами
+        //но он не обновляет сейчас ))) метод отрабатывает, но в этом методе setupUI после первой его отработки дальше другие данные в mainView не сетятся
+        setupUI()
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mainView
         
-        setupUI()
+        
         answerButtonsTapped()
         playSound(soundFileName: "zvukChasov")
         exitButtonTapped()
@@ -40,6 +44,9 @@ class GameViewController: UIViewController {
         mainView.buttonAnswerB.setTitle(quiz.getAnswers()[1], for: .normal)
         mainView.buttonAnswerC.setTitle(quiz.getAnswers()[2], for: .normal)
         mainView.buttonAnswerD.setTitle(quiz.getAnswers()[3], for: .normal)
+        //Добавила номер вопроса и сумму
+        mainView.questionNumberLabel.text = "Вопрос \(quiz.currentQuestionNumber)/15"
+        mainView.sumTotalLabel.text = quiz.sums[quiz.currentQuestionNumber]!
     }
     
 //    func answerButtonsTapped() {
@@ -104,7 +111,7 @@ class GameViewController: UIViewController {
             print("take money")
             //тут получается после выбора ответа и интригующей музыки на 5 секунд должен быть пуш на vc результатов, он оттуда сделает поп обратно через 5 секунд, если ответ верный, или запушит уже гейм овер vc
             //нужно correctAnswer прокинуть сюда
-            let vc = ResultViewController(questionIndex: self.quiz.numQuestions, isCorrectAnswer: false)
+            let vc = ResultViewController(questionNumber: self.quiz.currentQuestionNumber, isCorrectAnswer: true)
             self.navigationController?.pushViewController(vc, animated: true)
         }
         mainView.takeMoneyButton.addAction(tap, for: .touchUpInside)
