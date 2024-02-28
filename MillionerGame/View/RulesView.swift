@@ -29,11 +29,11 @@ class RulesView: UIView {
         logoLabel.textAlignment = .center
         
         rulesLabel.isScrollEnabled = true
-        rulesLabel.text = "тут правила я их позже добавлю в отдельный файл"
+        rulesLabel.text = rules
         rulesLabel.font = UIFont(name: "Gilroy-Bold", size: 15)
         rulesLabel.backgroundColor = .clear
         rulesLabel.textColor = .white
-        rulesLabel.textAlignment = .center
+        rulesLabel.textAlignment = .natural
         rulesLabel.isEditable = false
         
         let stack = UIStackView(arrangedSubviews: [logoLabel, rulesLabel, homeButton])
