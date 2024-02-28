@@ -13,13 +13,13 @@ class ResultTableViewCell: UITableViewCell {
     private let questionLabel = UILabel()
     private let sumLabel = UILabel()
     
-    func setupUI(cellTotal: Int, questionNumber: Int, rowNumber: Int, isCorrect: Bool, isMilestoneSum: Bool, sum: String) {
+    func setupUI(cellTotal: Int, questionIndex: Int, rowNumber: Int, isCorrect: Bool, isMilestoneSum: Bool, sum: String) {
         
         isUserInteractionEnabled = false
         
         background.contentMode = .scaleAspectFill
         background.image = calculateBackground(rowNumber: rowNumber, isMilestoneSum: isMilestoneSum)
-        if (cellTotal - 1) - questionNumber == rowNumber {
+        if (cellTotal - 1) - questionIndex == rowNumber {
             background.image = highlightQuestion(isCorrect: isCorrect)
         }
         background.clipsToBounds = true

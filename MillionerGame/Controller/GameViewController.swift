@@ -29,7 +29,7 @@ class GameViewController: UIViewController {
         
         setupUI()
         answerButtonsTapped()
-//        playSound(soundFileName: "zvukChasov")
+        playSound(soundFileName: "zvukChasov")
         exitButtonTapped()
         takeMoneyButtonTapped()
     }
@@ -74,10 +74,8 @@ class GameViewController: UIViewController {
             let isCorrectAnswer = self.quiz.checkAnswer(answerIndex)
             if isCorrectAnswer {
                 print("Верный ответ!")
-                
             } else {
                 print("Неверный ответ!")
-                
             }
         }
         mainView.buttonAnswerA.addAction(tap, for: .touchUpInside)
@@ -104,8 +102,9 @@ class GameViewController: UIViewController {
     func takeMoneyButtonTapped() {
         let tap = UIAction { _ in
             print("take money")
-            
-            let vc = ResultViewController(questionNumber: 3, isCorrectAnswer: false)
+            //тут получается после выбора ответа и интригующей музыки на 5 секунд должен быть пуш на vc результатов, он оттуда сделает поп обратно через 5 секунд, если ответ верный, или запушит уже гейм овер vc
+            //нужно correctAnswer прокинуть сюда
+            let vc = ResultViewController(questionIndex: self.quiz.numQuestions, isCorrectAnswer: false)
             self.navigationController?.pushViewController(vc, animated: true)
         }
         mainView.takeMoneyButton.addAction(tap, for: .touchUpInside)

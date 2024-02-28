@@ -12,7 +12,7 @@ class ResultView: UIView, UITableViewDataSource {
     ///Переход на другой экран по закрытию экрана с результатами в зависимости от правильности ответа
     var nextVC: ((_ milestone: String?) -> Void)?
 
-    private let questionNumber: Int
+    private let questionIndex: Int
     private let isCorrectAnswer: Bool
     
     ///Все суммы возможного выигрыша
@@ -26,18 +26,18 @@ class ResultView: UIView, UITableViewDataSource {
     private let logo = UIImageView()
     private let tableView = UITableView(frame: CGRect(), style: .plain)
     
-    init(questionNumber: Int, isCorrectAnswer: Bool) {
-        self.questionNumber = questionNumber
+    init(questionIndex: Int, isCorrectAnswer: Bool) {
+        self.questionIndex = questionIndex
         self.isCorrectAnswer = isCorrectAnswer
         super.init(frame: .zero)
         //Сохраняем несгораемую сумму, если она была достигнута
-        if milestoneSums.contains(sums[questionNumber]) && isCorrectAnswer {
-            ResultView.lastMilestone = sums[questionNumber]
+        if milestoneSums.contains(sums[questionIndex]) && isCorrectAnswer {
+            ResultView.lastMilestone = sums[questionIndex]
         }
         setupUI()
         
-        //Тут пока временно сделала автоматическое закрытие экрана результатов и перехода на следующий экран через 4секунды после появления экрана результатов
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) { [weak self] in
+        //Тут пока временно сделала автоматическое закрытие экрана результатов и перехода на следующий экран через 5 секунд (время проигрывания звука верного/неверного ответа)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
             //Передаем в замыкание выхода с экрана результатов последнюю достигнутую несгораемую сумму, если она была достигнута. Для ее дальнейшей передачи и отображения на экране 'Game Over'
             self?.nextVC?(ResultView.lastMilestone)
         }
@@ -92,7 +92,7 @@ class ResultView: UIView, UITableViewDataSource {
         let isMilestone: Bool = {
             milestoneSums.contains(sums.reversed()[indexPath.row])
         }()
-        cell.setupUI(cellTotal: sums.count, questionNumber: questionNumber, rowNumber: indexPath.row, isCorrect: isCorrectAnswer, isMilestoneSum: isMilestone, sum: sums.reversed()[indexPath.row])
+        cell.setupUI(cellTotal: sums.count, questionIndex: questionIndex, rowNumber: indexPath.row, isCorrect: isCorrectAnswer, isMilestoneSum: isMilestone, sum: sums.reversed()[indexPath.row])
         
         return cell
     }
