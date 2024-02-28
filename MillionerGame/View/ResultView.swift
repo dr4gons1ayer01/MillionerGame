@@ -11,14 +11,11 @@ class ResultView: UIView, UITableViewDataSource {
     
     ///Переход на другой экран по закрытию экрана с результатами в зависимости от правильности ответа
     var nextVC: ((_ milestone: String?) -> Void)?
-
+    private let quiz = Quiz()
     private let questionIndex: Int
     private let isCorrectAnswer: Bool
     
-    ///Все суммы возможного выигрыша
-    private let sums = ["100 RUB", "200 RUB", "300 RUB", "500 RUB", "1000 RUB", "2000 RUB", "4000 RUB", "8000 RUB", "16000 RUB", "32000 RUB", "64000 RUB", "125000 RUB", "250000 RUB", "500000 RUB", "1 миллион"]
-    ///Несгораемые суммы возможного выигрыша
-    private let milestoneSums = ["1000 RUB", "32000 RUB", "1 миллион"]
+    
     ///Хранит последнюю несгораемую сумму, если она была достигнута
     private static var lastMilestone: String?
     
@@ -31,8 +28,8 @@ class ResultView: UIView, UITableViewDataSource {
         self.isCorrectAnswer = isCorrectAnswer
         super.init(frame: .zero)
         //Сохраняем несгораемую сумму, если она была достигнута
-        if milestoneSums.contains(sums[questionIndex]) && isCorrectAnswer {
-            ResultView.lastMilestone = sums[questionIndex]
+        if quiz.milestoneSums.contains(quiz.sums.map { $0.value }[questionIndex]) && isCorrectAnswer {
+            ResultView.lastMilestone = quiz.sums[questionIndex]
         }
         setupUI()
         
@@ -84,15 +81,16 @@ class ResultView: UIView, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sums.count
+        quiz.sums.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ResultTableViewCell
+        let sortedSums = quiz.sums.sorted { $0.key < $1.key }
         let isMilestone: Bool = {
-            milestoneSums.contains(sums.reversed()[indexPath.row])
+            quiz.milestoneSums.contains(sortedSums.map { $0.value }.reversed()[indexPath.row])
         }()
-        cell.setupUI(cellTotal: sums.count, questionIndex: questionIndex, rowNumber: indexPath.row, isCorrect: isCorrectAnswer, isMilestoneSum: isMilestone, sum: sums.reversed()[indexPath.row])
+        cell.setupUI(cellTotal: quiz.sums.count, questionIndex: questionIndex, rowNumber: indexPath.row, isCorrect: isCorrectAnswer, isMilestoneSum: isMilestone, sum: sortedSums.map { $0.value }.reversed()[indexPath.row])
         
         return cell
     }

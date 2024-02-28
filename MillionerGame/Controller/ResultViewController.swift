@@ -16,8 +16,8 @@ class ResultViewController: UIViewController {
     private var wonMillion = false
     private var player: AVAudioPlayer!
     
-    init(questionIndex: Int, isCorrectAnswer: Bool) {
-        self.questionIndex = questionIndex
+    init(questionNumber: Int, isCorrectAnswer: Bool) {
+        self.questionIndex = questionNumber - 1
         self.isCorrectAnswer = isCorrectAnswer
         resultView = ResultView(questionIndex: questionIndex, isCorrectAnswer: isCorrectAnswer)
         super.init(nibName: nil, bundle: nil)
@@ -43,15 +43,18 @@ class ResultViewController: UIViewController {
     
     private func quitResults(milestone: String?) {
         if isCorrectAnswer {
-            print("возврат на экран вопросов, следующий вопрос")
             //Если последний вопрос на миллион и ответ верный
-            if questionIndex == Quiz().questions.count - 1 && isCorrectAnswer {
+            print("переход на экран 'Game Over', выиграл 1млн")
+            if questionIndex == 14 {
                 wonMillion = true
                 navigationController?.pushViewController(GameOverViewController(questionIndex: questionIndex, milestone: milestone, wonMillion: wonMillion), animated: true)
             } else {
+                //Если ответ верный, игра продолжается, возвращаемся на GameVC
+                print("возврат на экран вопросов, следующий вопрос")
                 navigationController?.popViewController(animated: true)
             }
         } else {
+            //Если ответ неверный, пушим GameOverVC
             print("переход на экран 'Game Over'")
             navigationController?.pushViewController(GameOverViewController(questionIndex: questionIndex, milestone: milestone, wonMillion: wonMillion), animated: true)
             resultView.restartResults()
