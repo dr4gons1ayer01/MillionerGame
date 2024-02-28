@@ -29,7 +29,7 @@ class GameViewController: UIViewController {
         
         setupUI()
         answerButtonsTapped()
-        playSound(soundFileName: "zvukChasov")
+//        playSound(soundFileName: "zvukChasov")
         exitButtonTapped()
         takeMoneyButtonTapped()
     }
@@ -74,8 +74,10 @@ class GameViewController: UIViewController {
             let isCorrectAnswer = self.quiz.checkAnswer(answerIndex)
             if isCorrectAnswer {
                 print("Верный ответ!")
+                
             } else {
                 print("Неверный ответ!")
+                
             }
         }
         mainView.buttonAnswerA.addAction(tap, for: .touchUpInside)
@@ -103,8 +105,8 @@ class GameViewController: UIViewController {
         let tap = UIAction { _ in
             print("take money")
             
-            let vc = ResultViewController(questionNumber: 3, isCorrectAnswer: true)
-            self.present(vc, animated: true, completion: nil)
+            let vc = ResultViewController(questionNumber: 3, isCorrectAnswer: false)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
         mainView.takeMoneyButton.addAction(tap, for: .touchUpInside)
     }
