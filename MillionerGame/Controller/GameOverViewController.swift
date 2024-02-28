@@ -11,8 +11,8 @@ class GameOverViewController: UIViewController {
     
     private let gameOverView: GameOverView
     
-    init(questionNumber: Int, milestone: String? = nil) {
-        gameOverView = GameOverView(questionNumber: questionNumber, milestone: milestone)
+    init(questionIndex: Int, milestone: String?, wonMillion: Bool) {
+        gameOverView = GameOverView(questionIndex: questionIndex, milestone: milestone, wonMillion: wonMillion)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -29,6 +29,7 @@ class GameOverViewController: UIViewController {
     }
     
     private func restart() {
+        print("возврат на начальный экран, рестарт игры")
         navigationController?.popToRootViewController(animated: true)
     }
 }
