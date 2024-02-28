@@ -12,9 +12,10 @@ class GameOverView: UIView {
     ///Действие по тапу на кнопку рестарта игры
     var onTap: (() -> Void)?
     
-    private let questionNumber: Int
+    private let questionIndex: Int
     ///Несгораемая сумма для экрана 'Game Over', если она была достигнута
     private let milestone: String?
+    private let wonMillion: Bool
     
     private let background = UIImageView()
     private let logo = UIImageView()
@@ -24,9 +25,10 @@ class GameOverView: UIView {
     private let loseLabel = UILabel()
     private let restartButton = UIButton(title: "Play again", bg: .systemGreen)
     
-    init(questionNumber: Int, milestone: String?) {
-        self.questionNumber = questionNumber
+    init(questionIndex: Int, milestone: String?, wonMillion: Bool) {
+        self.questionIndex = questionIndex
         self.milestone = milestone
+        self.wonMillion = wonMillion
         super.init(frame: .zero)
         setupUI()
     }
@@ -69,7 +71,14 @@ class GameOverView: UIView {
         loseLabel.font = UIFont(name: "Gilroy-Regular", size: 20)
         loseLabel.textColor = .white
         loseLabel.textAlignment = .center
-        loseLabel.text = "Losed on \(String(questionNumber + 1)) question"
+        loseLabel.text = "Losed on \(String(questionIndex + 1)) question"
+        
+        //UI если выиграл миллион
+        if wonMillion {
+            gameOverLabel.text = "Congratulations!"
+            milestoneLabel.text = "You won 1 millon!"
+            loseLabel.text = "Answered all the questions!"
+        }
         
         addSubview(background)
         addSubview(logo)

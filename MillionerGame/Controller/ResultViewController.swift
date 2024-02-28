@@ -6,17 +6,20 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ResultViewController: UIViewController {
     
-    private let questionNumber: Int
+    private let questionIndex: Int
     private let isCorrectAnswer: Bool
     private let resultView: ResultView
+    private var wonMillion = false
+    private var player: AVAudioPlayer!
     
-    init(questionNumber: Int, isCorrectAnswer: Bool) {
-        self.questionNumber = questionNumber
+    init(questionIndex: Int, isCorrectAnswer: Bool) {
+        self.questionIndex = questionIndex
         self.isCorrectAnswer = isCorrectAnswer
-        resultView = ResultView(questionNumber: questionNumber, isCorrectAnswer: isCorrectAnswer)
+        resultView = ResultView(questionIndex: questionIndex, isCorrectAnswer: isCorrectAnswer)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,17 +33,36 @@ class ResultViewController: UIViewController {
         ////Назначаем для вью логику перехода на другой экран по закрытию экрана с результатами в зависимости от правильности ответа
         resultView.nextVC = quitResults(milestone:)
         view = resultView
+        if isCorrectAnswer {
+            playSound(soundFileName: "otvetVernyiy")
+        } else {
+            playSound(soundFileName: "zvukNepravilnogo")
+        }
+        
     }
     
     private func quitResults(milestone: String?) {
         if isCorrectAnswer {
-            print("переход на экран следующего вопроса")
-            navigationController?.pushViewController(GameViewController(), animated: true)
+            print("возврат на экран вопросов, следующий вопрос")
+            //Если последний вопрос на миллион и ответ верный
+            if questionIndex == Quiz().questions.count - 1 && isCorrectAnswer {
+                wonMillion = true
+                navigationController?.pushViewController(GameOverViewController(questionIndex: questionIndex, milestone: milestone, wonMillion: wonMillion), animated: true)
+            } else {
+                navigationController?.popViewController(animated: true)
+            }
         } else {
-            print("возврат на начальный экран, рестарт игры")
-            navigationController?.pushViewController(GameOverViewController(questionNumber: questionNumber, milestone: milestone), animated: true)
+            print("переход на экран 'Game Over'")
+            navigationController?.pushViewController(GameOverViewController(questionIndex: questionIndex, milestone: milestone, wonMillion: wonMillion), animated: true)
             resultView.restartResults()
         }
+    }
+    
+    private func playSound(soundFileName: String) {
+        guard let url = Bundle.main.url(forResource: soundFileName, withExtension: "mp3") else { return }
+        player = try? AVAudioPlayer(contentsOf: url)
+        player.play()
+
     }
     
 }
