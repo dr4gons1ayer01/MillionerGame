@@ -40,13 +40,42 @@ class GameViewController: UIViewController {
         mainView.buttonAnswerB.setTitle(quiz.getAnswers()[1], for: .normal)
         mainView.buttonAnswerC.setTitle(quiz.getAnswers()[2], for: .normal)
         mainView.buttonAnswerD.setTitle(quiz.getAnswers()[3], for: .normal)
-      
     }
     
+//    func answerButtonsTapped() {
+//            let tap = UIAction { action in
+//                if let button = action.sender as? UIButton {
+//                    button.setTitle(quiz.getCorrectAnswer(), for: .normal) 
+//                }
+//            }
+//            mainView.buttonAnswerA.addAction(tap, for: .touchUpInside)
+//            mainView.buttonAnswerB.addAction(tap, for: .touchUpInside)
+//            mainView.buttonAnswerC.addAction(tap, for: .touchUpInside)
+//            mainView.buttonAnswerD.addAction(tap, for: .touchUpInside)
+//        }
     func answerButtonsTapped() {
         let tap = UIAction { action in
-            if let button = action.sender as? UIButton {
-                if button.setTitle(quiz.getCorrectAnswer(), for: .normal) == 
+            guard let button = action.sender as? UIButton else { return }
+            
+            let answerIndex: Int
+            switch button {
+            case self.mainView.buttonAnswerA:
+                answerIndex = 0
+            case self.mainView.buttonAnswerB:
+                answerIndex = 1
+            case self.mainView.buttonAnswerC:
+                answerIndex = 2
+            case self.mainView.buttonAnswerD:
+                answerIndex = 3
+            default:
+                return
+            }
+            
+            let isCorrectAnswer = self.quiz.checkAnswer(answerIndex)
+            if isCorrectAnswer {
+                print("Верный ответ!")
+            } else {
+                print("Неверный ответ!")
             }
         }
         mainView.buttonAnswerA.addAction(tap, for: .touchUpInside)
@@ -54,6 +83,7 @@ class GameViewController: UIViewController {
         mainView.buttonAnswerC.addAction(tap, for: .touchUpInside)
         mainView.buttonAnswerD.addAction(tap, for: .touchUpInside)
     }
+
     
     func exitButtonTapped() {
         let tap = UIAction { _ in

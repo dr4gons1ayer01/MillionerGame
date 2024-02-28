@@ -36,7 +36,7 @@ class GameView: UIView {
         super.init(frame: CGRect())
         setupUI()
     }
-
+    
     // MARK: - Setup UI
     
     func setupUI() {
@@ -69,27 +69,27 @@ class GameView: UIView {
         
         
         let answersButtonsStack = UIStackView(views: [buttonAnswerA,
-                                                          buttonAnswerB,
-                                                          buttonAnswerC,
-                                                          buttonAnswerD],
-                                                  axis: .vertical,
-                                                spacing: 20)
+                                                      buttonAnswerB,
+                                                      buttonAnswerC,
+                                                      buttonAnswerD],
+                                              axis: .vertical,
+                                              spacing: 20)
         
         let mainStack = UIStackView(views: [topStack,
-                                                sumTotalLabel,
-                                                timerProgress,
-                                                questionTextLabel,
-                                                helpButtonsStackView,
-                                                answersButtonsStack],
-                                        axis: .vertical,
-                                        spacing: 10)
+                                            sumTotalLabel,
+                                            timerProgress,
+                                            questionTextLabel,
+                                            helpButtonsStackView,
+                                            answersButtonsStack],
+                                    axis: .vertical,
+                                    spacing: 10)
         addSubview(backgroundImage)
         addSubview(mainStack)
         
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         mainStack.distribution = .equalSpacing
         mainStack.translatesAutoresizingMaskIntoConstraints = false
-
+        
         // MARK: - Constraints
         
         NSLayoutConstraint.activate([
@@ -106,14 +106,16 @@ class GameView: UIView {
             timerProgress.topAnchor.constraint(equalTo: sumTotalLabel.bottomAnchor, constant: 20),
             timerProgress.leadingAnchor.constraint(equalTo: mainStack.leadingAnchor),
             timerProgress.trailingAnchor.constraint(equalTo: mainStack.trailingAnchor),
-          
+            
             questionTextLabel.heightAnchor.constraint(equalToConstant: 200),
             
             
-        
+            
         ])
-        
 
+        
+        
+        
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -159,15 +161,6 @@ extension UIButton {
     }
 }
 
-//extension UIImageView {
-//    convenience init(name: String) {
-//        self.init()
-//        self.image = UIImage(named: name)
-//        self.contentMode = .scaleAspectFit
-//        self.isUserInteractionEnabled = true
-//        self.translatesAutoresizingMaskIntoConstraints = false
-//    }
-//}
 
 // MARK: - UI Build
 
