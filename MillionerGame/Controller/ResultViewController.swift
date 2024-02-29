@@ -10,14 +10,14 @@ import UIKit
 class ResultViewController: UIViewController {
     
     private let questionIndex: Int
-    private let isCorrectAnswer: Bool
+    private let isCorrectAnswer: Bool?
     private let resultView: ResultView
-    private var wonMillion = false
     
-    init(questionNumber: Int, isCorrectAnswer: Bool) {
-        self.questionIndex = questionNumber - 1
+    init(questionNumber: Int, isCorrectAnswer: Bool? = nil) {
+        self.questionIndex = questionNumber - 2
         self.isCorrectAnswer = isCorrectAnswer
         resultView = ResultView(questionIndex: questionIndex, isCorrectAnswer: isCorrectAnswer)
+
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -28,29 +28,22 @@ class ResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isHidden = true
-        ////Назначаем для вью логику перехода на другой экран по закрытию экрана с результатами в зависимости от правильности ответа
-        resultView.nextVC = quitResults(milestone:)
-        view = resultView
-        if isCorrectAnswer {
-            SoundManager.shared.playSound(soundFileName: "otvetVernyiy")
-        } else {
-            SoundManager.shared.playSound(soundFileName: "zvukNepravilnogo")
-        }
+        setup()
+        
     }
     ///остановка звука по закрытии вью
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        SoundManager.shared.stopSound()
+//        SoundManager.shared.stopSound()
     }
 
-    private func quitResults(milestone: String?) {
+    private func quitResults() {
+        guard let isCorrectAnswer else { return }
         if isCorrectAnswer {
-            //Если последний вопрос на миллион и ответ верный
-            print("переход на экран 'Game Over', выиграл 1млн")
             if questionIndex == 14 {
-                wonMillion = true
-                ///
-                let vc = GameOverViewController(questionIndex: questionIndex, milestone: milestone, wonMillion: wonMillion)
+                //Если последний вопрос на миллион и ответ верный
+                print("переход на экран 'Game Over', выиграл 1млн")
+                let vc = GameOverViewController(questionIndex: questionIndex)
                 navigationController?.pushViewController(vc, animated: true)
                 
             } else {
@@ -62,9 +55,27 @@ class ResultViewController: UIViewController {
             //Если ответ неверный, пушим GameOverVC
             print("переход на экран 'Game Over")
             ///
-            let vc = GameOverViewController(questionIndex: questionIndex, milestone: milestone, wonMillion: wonMillion)
+            let vc = GameOverViewController(questionIndex: questionIndex)
             navigationController?.pushViewController(vc, animated: true)
-            resultView.restartResults()
+        }
+    }
+    
+    private func closeProgress() {
+        //Просто закрываем экран прогресса и возвращаемся на game vc
+        print("возврат на экран вопросов из таблицы с просмотром прогресса")
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func setup() {
+        view = resultView
+        resultView.closeProgress = closeProgress
+        guard let isCorrectAnswer else { return }
+        ////Назначаем для вью логику перехода на другой экран по закрытию экрана с результатами в зависимости от правильности ответа
+        resultView.nextVC = quitResults
+        if isCorrectAnswer {
+            SoundManager.shared.playSound(soundFileName: "otvetVernyiy")
+        } else {
+            SoundManager.shared.playSound(soundFileName: "zvukNepravilnogo")
         }
     }
     

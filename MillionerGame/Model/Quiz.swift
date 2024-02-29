@@ -12,9 +12,11 @@ struct Quiz {
     ///Текущий порядковый номер вопроса(не индекс)
     var currentQuestionNumber = 1
     ///Все суммы возможного выигрыша
-    let sums = [1: "100 RUB", 2: "200 RUB", 3: "300 RUB", 4: "500 RUB", 5: "1000 RUB", 6: "2000 RUB", 7: "4000 RUB", 8: "8000 RUB", 9: "16000 RUB", 10: "32000 RUB", 11: "64000 RUB", 12: "125000 RUB", 13: "250000 RUB", 14: "500000 RUB", 15: "1 миллион"]
+    static let sums = [1: "100 RUB", 2: "200 RUB", 3: "300 RUB", 4: "500 RUB", 5: "1000 RUB", 6: "2000 RUB", 7: "4000 RUB", 8: "8000 RUB", 9: "16000 RUB", 10: "32000 RUB", 11: "64000 RUB", 12: "125000 RUB", 13: "250000 RUB", 14: "500000 RUB", 15: "1 миллион"]
     ///Несгораемые суммы возможного выигрыша
-    let milestoneSums = ["1000 RUB", "32000 RUB", "1 миллион"]
+    static let milestoneSums = ["1000 RUB", "32000 RUB", "1 миллион"]
+    ///Хранит последнюю несгораемую сумму, если она была достигнута
+    static var lastMilestone: String?
     
     private let questions: [[Question]]
     private var currentQuestionSection = 0 //Внутренняя переменная для индекса вопроса в текущей секции
@@ -74,7 +76,6 @@ struct Quiz {
         currentQuestionNumber += 1
         if currentQuestionIndexInSection == questions[currentQuestionSection].count - 1 {
             if currentQuestionSection == questions.count - 1 {
-                restartGame()
             } else {
                 currentQuestionSection += 1
                 currentQuestionIndexInSection = 0
@@ -85,10 +86,11 @@ struct Quiz {
     }
     
     //рестарт игры
-    private mutating func restartGame() {
+    mutating func restartGame() {
         currentQuestionNumber = 1
         currentQuestionSection = 0
         currentQuestionIndexInSection = 0
+        Quiz.lastMilestone = nil
     }
     
 }

@@ -25,10 +25,10 @@ class GameOverView: UIView {
     private let loseLabel = UILabel()
     private let restartButton = UIButton(title: "Play again", bg: .systemGreen)
     
-    init(questionIndex: Int, milestone: String?, wonMillion: Bool) {
+    init(questionIndex: Int) {
         self.questionIndex = questionIndex
-        self.milestone = milestone
-        self.wonMillion = wonMillion
+        self.milestone = Quiz.lastMilestone
+        self.wonMillion = {Quiz.lastMilestone == "1 миллион"}()
         super.init(frame: .zero)
         setupUI()
     }
@@ -117,7 +117,7 @@ class GameOverView: UIView {
     }
     
     ///Действие по тапу на кнопку рестарта игры
-    @objc func restartTapped(_ sender: UIButton) {
+    @objc private func restartTapped(_ sender: UIButton) {
         onTap?()
     }
 }
