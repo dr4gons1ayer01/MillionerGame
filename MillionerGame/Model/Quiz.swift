@@ -69,6 +69,11 @@ struct Quiz {
         return result
     }
     
+    func getRightAnswerIndex() -> Int  {
+        let index = questions[currentQuestionSection][currentQuestionIndexInSection].correctAnswerIndex
+        return index
+    }
+    
     //Переход к следующему вопросу
     private mutating func nextQuestion() {
         currentQuestionNumber += 1
