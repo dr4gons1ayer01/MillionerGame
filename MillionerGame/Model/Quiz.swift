@@ -45,12 +45,16 @@ struct Quiz {
         questions[numQuestions].answers.map { $0.text }
     }
     
-    func getCorrectAnswer() -> Int {
-        questions[numQuestions].correctAnswerIndex
-    }
+//    func getCorrectAnswer() -> Int {
+//        questions[numQuestions].correctAnswerIndex
+//    }
     
     func checkAnswer(_ answer: Int) -> Bool {
         answer == questions[numQuestions].correctAnswerIndex
+    }
+    
+    func nextQuestion() {
+        
     }
     
 }
