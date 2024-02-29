@@ -65,7 +65,7 @@ class GameView: UIView {
                                                        helpPhoneButton,
                                                        helpHumansButton], 
                                                axis: .horizontal,
-                                               spacing: 20)
+                                               spacing: 30)
         
         
         let answersButtonsStack = UIStackView(views: [buttonAnswerA,
@@ -108,8 +108,6 @@ class GameView: UIView {
             timerProgress.trailingAnchor.constraint(equalTo: mainStack.trailingAnchor),
             
             questionTextLabel.heightAnchor.constraint(equalToConstant: 200),
-            
-            
             
         ])
 
