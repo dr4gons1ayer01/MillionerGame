@@ -6,16 +6,11 @@
 //
 
 import UIKit
-import AVFoundation
 
 class GameViewController: UIViewController {
     let mainView = GameView()
     var quiz = Quiz()
-    var player: AVAudioPlayer!
-    var countdownTimer: Timer?      //время обратного отсчета
-    var reminingTime: Int = 0       //оставшееся время
-    var selectedTime: Int?          //выбранное время для прогрессВью
-    var correctAnswerIndex: Int = 0 //правильный ответ
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -23,8 +18,9 @@ class GameViewController: UIViewController {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         //вот это перенесла из viewDidLoad сюда, чтобы вопросы обновлялись после возврата с экрана с таблицей со всеми вопросами
         //но он не обновляет сейчас ))) метод отрабатывает, но в этом методе setupUI после первой его отработки дальше другие данные в mainView не сетятся
-        setupUI()
         
+        updateQuestionAndSum()
+        SoundManager.shared.playSound(soundFileName: "zvukChasov")
     }
     
     override func viewDidLoad() {
@@ -33,33 +29,21 @@ class GameViewController: UIViewController {
         
         
         answerButtonsTapped()
-        playSound(soundFileName: "zvukChasov")
         exitButtonTapped()
         takeMoneyButtonTapped()
     }
     
-    func setupUI() {
+    ///обновление вопросов и сумм
+    func updateQuestionAndSum() {
         mainView.questionTextLabel.text = quiz.getQuestion()
         mainView.buttonAnswerA.setTitle(quiz.getAnswers()[0], for: .normal)
         mainView.buttonAnswerB.setTitle(quiz.getAnswers()[1], for: .normal)
         mainView.buttonAnswerC.setTitle(quiz.getAnswers()[2], for: .normal)
         mainView.buttonAnswerD.setTitle(quiz.getAnswers()[3], for: .normal)
-        //Добавила номер вопроса и сумму
         mainView.questionNumberLabel.text = "Вопрос \(quiz.currentQuestionNumber)/15"
         mainView.sumTotalLabel.text = quiz.sums[quiz.currentQuestionNumber]!
     }
-    
-//    func answerButtonsTapped() {
-//            let tap = UIAction { action in
-//                if let button = action.sender as? UIButton {
-//                    button.setTitle(quiz.getCorrectAnswer(), for: .normal) 
-//                }
-//            }
-//            mainView.buttonAnswerA.addAction(tap, for: .touchUpInside)
-//            mainView.buttonAnswerB.addAction(tap, for: .touchUpInside)
-//            mainView.buttonAnswerC.addAction(tap, for: .touchUpInside)
-//            mainView.buttonAnswerD.addAction(tap, for: .touchUpInside)
-//        }
+    //TODO: - дописать
     func answerButtonsTapped() {
         let tap = UIAction { action in
             guard let button = action.sender as? UIButton else { return }
@@ -81,8 +65,24 @@ class GameViewController: UIViewController {
             let isCorrectAnswer = self.quiz.checkAnswer(answerIndex)
             if isCorrectAnswer {
                 print("Верный ответ!")
+                ///
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    self.updateQuestionAndSum()
+                    SoundManager.shared.stopSound()
+                    let vc = ResultViewController(questionNumber: self.quiz.currentQuestionNumber, isCorrectAnswer: true)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                SoundManager.shared.playSound(soundFileName: "otvetPrinyat")
+                
             } else {
                 print("Неверный ответ!")
+                ///
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    SoundManager.shared.stopSound()
+                    let vc = ResultViewController(questionNumber: self.quiz.currentQuestionNumber, isCorrectAnswer: false)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+                SoundManager.shared.playSound(soundFileName: "otvetPrinyat")
             }
         }
         mainView.buttonAnswerA.addAction(tap, for: .touchUpInside)
@@ -90,12 +90,11 @@ class GameViewController: UIViewController {
         mainView.buttonAnswerC.addAction(tap, for: .touchUpInside)
         mainView.buttonAnswerD.addAction(tap, for: .touchUpInside)
     }
-
+    
     
     func exitButtonTapped() {
         let tap = UIAction { _ in
-            
-            
+            //TODO: -  По желанию можно алерт сделать
             if let navigationController = self.navigationController {
                 navigationController.popViewController(animated: true)
             } else {
@@ -111,28 +110,19 @@ class GameViewController: UIViewController {
             print("take money")
             //тут получается после выбора ответа и интригующей музыки на 5 секунд должен быть пуш на vc результатов, он оттуда сделает поп обратно через 5 секунд, если ответ верный, или запушит уже гейм овер vc
             //нужно correctAnswer прокинуть сюда
+            
+            //TODO: я как понимаю здесь можно посмотреть текущий прогресс, показ ResultView без музыки
             let vc = ResultViewController(questionNumber: self.quiz.currentQuestionNumber, isCorrectAnswer: true)
             self.navigationController?.pushViewController(vc, animated: true)
         }
         mainView.takeMoneyButton.addAction(tap, for: .touchUpInside)
     }
-
-    func playSound(soundFileName: String) {
-        guard let url = Bundle.main.url(forResource: soundFileName, withExtension: "mp3") else { return }
-        player = try? AVAudioPlayer(contentsOf: url)
-        player.play()
-
-    }
+    
+    
     
     //TODO: таймер доделать
-    func startTimer(for time: Int) {
-        countdownTimer?.invalidate()
-        reminingTime = time
-        countdownTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
-    }
-    @objc func updateTimer() {
-        
-    }
+    
+    
 }
 
-    
+

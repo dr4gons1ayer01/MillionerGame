@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 class ResultViewController: UIViewController {
     
@@ -14,7 +13,6 @@ class ResultViewController: UIViewController {
     private let isCorrectAnswer: Bool
     private let resultView: ResultView
     private var wonMillion = false
-    private var player: AVAudioPlayer!
     
     init(questionNumber: Int, isCorrectAnswer: Bool) {
         self.questionIndex = questionNumber - 1
@@ -34,20 +32,27 @@ class ResultViewController: UIViewController {
         resultView.nextVC = quitResults(milestone:)
         view = resultView
         if isCorrectAnswer {
-            playSound(soundFileName: "otvetVernyiy")
+            SoundManager.shared.playSound(soundFileName: "otvetVernyiy")
         } else {
-            playSound(soundFileName: "zvukNepravilnogo")
+            SoundManager.shared.playSound(soundFileName: "zvukNepravilnogo")
         }
-        
     }
-    
+    ///остановка звука по закрытии вью
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        SoundManager.shared.stopSound()
+    }
+
     private func quitResults(milestone: String?) {
         if isCorrectAnswer {
             //Если последний вопрос на миллион и ответ верный
             print("переход на экран 'Game Over', выиграл 1млн")
             if questionIndex == 14 {
                 wonMillion = true
-                navigationController?.pushViewController(GameOverViewController(questionIndex: questionIndex, milestone: milestone, wonMillion: wonMillion), animated: true)
+                ///
+                let vc = GameOverViewController(questionIndex: questionIndex, milestone: milestone, wonMillion: wonMillion)
+                navigationController?.pushViewController(vc, animated: true)
+                
             } else {
                 //Если ответ верный, игра продолжается, возвращаемся на GameVC
                 print("возврат на экран вопросов, следующий вопрос")
@@ -55,17 +60,13 @@ class ResultViewController: UIViewController {
             }
         } else {
             //Если ответ неверный, пушим GameOverVC
-            print("переход на экран 'Game Over'")
-            navigationController?.pushViewController(GameOverViewController(questionIndex: questionIndex, milestone: milestone, wonMillion: wonMillion), animated: true)
+            print("переход на экран 'Game Over")
+            ///
+            let vc = GameOverViewController(questionIndex: questionIndex, milestone: milestone, wonMillion: wonMillion)
+            navigationController?.pushViewController(vc, animated: true)
             resultView.restartResults()
         }
     }
     
-    private func playSound(soundFileName: String) {
-        guard let url = Bundle.main.url(forResource: soundFileName, withExtension: "mp3") else { return }
-        player = try? AVAudioPlayer(contentsOf: url)
-        player.play()
-
-    }
-    
 }
+
