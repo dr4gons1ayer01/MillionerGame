@@ -19,13 +19,13 @@ class StartViewController: UIViewController {
         start()
         
     }
-    
+    //немного переделала функцию, чтобы правила появлялись не как отдельный экран. читала, что таким способом мы не перегружаем память, так после нажатия кнопки "назад" сцена удалется из памяти
     func rules() {
         let tap = UIAction { _ in
             print("переход в правила")
             
             let vc = RulesViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.present(vc, animated: true)
         }
         mainView.rulesButton.addAction(tap, for: .touchUpInside)
     }

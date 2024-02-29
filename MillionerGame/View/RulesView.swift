@@ -10,9 +10,7 @@ import UIKit
 class RulesView: UIView {
     let backgroundImage = UIImageView(image: UIImage(named: "bg")!)
     let logoLabel = UILabel()
-    //rulesLabel вроде лейбл а не текстВью
     let rulesLabel = UITextView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-    //если создаешь кнопку пропиши ей логику в контроллере
     let homeButton = UIButton(title: "Назад", bg: .systemGreen)
     
     init() {
@@ -29,12 +27,13 @@ class RulesView: UIView {
         logoLabel.textAlignment = .center
         
         rulesLabel.isScrollEnabled = true
-        rulesLabel.text = "тут правила я их позже добавлю в отдельный файл"
+        rulesLabel.text = rules
         rulesLabel.font = UIFont(name: "Gilroy-Bold", size: 15)
         rulesLabel.backgroundColor = .clear
         rulesLabel.textColor = .white
-        rulesLabel.textAlignment = .center
+        rulesLabel.textAlignment = .natural
         rulesLabel.isEditable = false
+        rulesLabel.showsVerticalScrollIndicator = false
         
         let stack = UIStackView(arrangedSubviews: [logoLabel, rulesLabel, homeButton])
         stack.axis = .vertical
@@ -52,11 +51,10 @@ class RulesView: UIView {
             backgroundImage.leadingAnchor.constraint(equalTo: leadingAnchor),
             backgroundImage.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            //нулевые константы удали
-            stack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 0),
+            stack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             stack.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
             stack.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            stack.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 0)
+            stack.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
         ])
         
     }

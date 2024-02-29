@@ -20,8 +20,6 @@
 		BE0DCE072B8BB47800249D2E /* Gilroy-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE0DCE042B8BB47800249D2E /* Gilroy-Regular.ttf */; };
 		BE0DCE092B8BBCD700249D2E /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE082B8BBCD700249D2E /* GameViewController.swift */; };
 		BE0DCE0B2B8BBCE000249D2E /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE0A2B8BBCE000249D2E /* GameView.swift */; };
-		BE0DCE0D2B8BBD0D00249D2E /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE0C2B8BBD0D00249D2E /* QuestionViewController.swift */; };
-		BE0DCE0F2B8BBD1400249D2E /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE0E2B8BBD1400249D2E /* QuestionView.swift */; };
 		BE0DCE112B8BBD7900249D2E /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE102B8BBD7900249D2E /* ResultView.swift */; };
 		BE0DCE132B8BBD8A00249D2E /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE122B8BBD8A00249D2E /* ResultViewController.swift */; };
 		BE0DCE152B8BBE4100249D2E /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE142B8BBE4100249D2E /* GameOverViewController.swift */; };
@@ -35,6 +33,7 @@
 		BE0DCE2D2B8E1E5B00249D2E /* otvetVernyiy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE0DCE282B8E1E5B00249D2E /* otvetVernyiy.mp3 */; };
 		BE0DCE2E2B8E1E5B00249D2E /* zvukChasov.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE0DCE292B8E1E5B00249D2E /* zvukChasov.mp3 */; };
 		BE0DCE2F2B8E1E5B00249D2E /* zvukNepravilnogo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE0DCE2A2B8E1E5B00249D2E /* zvukNepravilnogo.mp3 */; };
+		BE0DCE312B90676400249D2E /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE302B90676400249D2E /* SoundManager.swift */; };
 		CBCD61852B8D3E49005C8F54 /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCD61842B8D3E49005C8F54 /* ResultTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,8 +53,6 @@
 		BE0DCE042B8BB47800249D2E /* Gilroy-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Gilroy-Regular.ttf"; sourceTree = "<group>"; };
 		BE0DCE082B8BBCD700249D2E /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		BE0DCE0A2B8BBCE000249D2E /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
-		BE0DCE0C2B8BBD0D00249D2E /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
-		BE0DCE0E2B8BBD1400249D2E /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		BE0DCE102B8BBD7900249D2E /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		BE0DCE122B8BBD8A00249D2E /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		BE0DCE142B8BBE4100249D2E /* GameOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +66,7 @@
 		BE0DCE282B8E1E5B00249D2E /* otvetVernyiy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = otvetVernyiy.mp3; sourceTree = "<group>"; };
 		BE0DCE292B8E1E5B00249D2E /* zvukChasov.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zvukChasov.mp3; sourceTree = "<group>"; };
 		BE0DCE2A2B8E1E5B00249D2E /* zvukNepravilnogo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zvukNepravilnogo.mp3; sourceTree = "<group>"; };
+		BE0DCE302B90676400249D2E /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		CBCD61842B8D3E49005C8F54 /* ResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,11 +124,10 @@
 			isa = PBXGroup;
 			children = (
 				BE0DCDD92B8B687D00249D2E /* StartViewController.swift */,
-				BE0DCE182B8BC1A800249D2E /* RulesViewController.swift */,
 				BE0DCE082B8BBCD700249D2E /* GameViewController.swift */,
 				BE0DCE122B8BBD8A00249D2E /* ResultViewController.swift */,
-				BE0DCE0C2B8BBD0D00249D2E /* QuestionViewController.swift */,
 				BE0DCE142B8BBE4100249D2E /* GameOverViewController.swift */,
+				BE0DCE182B8BC1A800249D2E /* RulesViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -143,7 +140,6 @@
 				BE0DCE0A2B8BBCE000249D2E /* GameView.swift */,
 				BE0DCE102B8BBD7900249D2E /* ResultView.swift */,
 				CBCD61842B8D3E49005C8F54 /* ResultTableViewCell.swift */,
-				BE0DCE0E2B8BBD1400249D2E /* QuestionView.swift */,
 				BE0DCE162B8BBE4A00249D2E /* GameOverView.swift */,
 			);
 			path = View;
@@ -173,6 +169,7 @@
 		BE0DCDF42B8B8C4C00249D2E /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				BE0DCE302B90676400249D2E /* SoundManager.swift */,
 				BE0DCE272B8E1E5B00249D2E /* boleeKachestvennyiy.mp3 */,
 				BE0DCE262B8E1E5B00249D2E /* otvetPrinyat.mp3 */,
 				BE0DCE282B8E1E5B00249D2E /* otvetVernyiy.mp3 */,
@@ -280,15 +277,14 @@
 				BE0DCE1D2B8BD2CF00249D2E /* Answer.swift in Sources */,
 				BE0DCDD82B8B687D00249D2E /* SceneDelegate.swift in Sources */,
 				5353F08D2B8CFB5B0088050A /* Rules.swift in Sources */,
-				BE0DCE0D2B8BBD0D00249D2E /* QuestionViewController.swift in Sources */,
 				BE0DCE132B8BBD8A00249D2E /* ResultViewController.swift in Sources */,
-				BE0DCE0F2B8BBD1400249D2E /* QuestionView.swift in Sources */,
 				CBCD61852B8D3E49005C8F54 /* ResultTableViewCell.swift in Sources */,
 				BE0DCE1B2B8BC1B300249D2E /* RulesView.swift in Sources */,
 				BE0DCE1F2B8D4ED500249D2E /* Quiz.swift in Sources */,
 				BE0DCE112B8BBD7900249D2E /* ResultView.swift in Sources */,
 				BE0DCE152B8BBE4100249D2E /* GameOverViewController.swift in Sources */,
 				BE0DCDEB2B8B69B400249D2E /* StartView.swift in Sources */,
+				BE0DCE312B90676400249D2E /* SoundManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
