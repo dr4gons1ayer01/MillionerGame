@@ -12,15 +12,22 @@ class ResultTableViewCell: UITableViewCell {
     private let background = UIImageView()
     private let questionLabel = UILabel()
     private let sumLabel = UILabel()
+    private var didPass = false
     
-    func setupUI(cellTotal: Int, questionIndex: Int, rowNumber: Int, isCorrect: Bool, isMilestoneSum: Bool, sum: String) {
+    func setupUI(cellTotal: Int, questionIndex: Int, rowNumber: Int, isCorrect: Bool?, isMilestoneSum: Bool, sum: String, didPass: Bool) {
         
         isUserInteractionEnabled = false
+        self.didPass = didPass
         
         background.contentMode = .scaleAspectFill
         background.image = calculateBackground(rowNumber: rowNumber, isMilestoneSum: isMilestoneSum)
-        if (cellTotal - 1) - questionIndex == rowNumber {
-            background.image = highlightQuestion(isCorrect: isCorrect)
+        if let achieved = highlightProgress() {
+            background.image = achieved
+        }
+        if let isCorrect {
+            if (cellTotal - 1) - questionIndex == rowNumber {
+                background.image = highlightQuestion(isCorrect: isCorrect)
+            }
         }
         background.clipsToBounds = true
         
@@ -70,12 +77,20 @@ class ResultTableViewCell: UITableViewCell {
     
     ///Подсвечивает ячейку с текущим вопросом верно/неверно
     private func highlightQuestion(isCorrect: Bool) -> UIImage {
-        
-        if isCorrect {
+        if isCorrect || didPass {
             return UIImage(imageLiteralResourceName: "Rectangle 3")
         } else {
             return UIImage(imageLiteralResourceName: "Rectangle 5")
         }
     }
+    
+    private func highlightProgress() -> UIImage? {
+        if didPass {
+            return UIImage(imageLiteralResourceName: "Rectangle 3")
+        }  else {
+            return nil
+        }
+    }
+   
 }
 

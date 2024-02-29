@@ -10,34 +10,35 @@ import UIKit
 class ResultView: UIView, UITableViewDataSource {
     
     ///Переход на другой экран по закрытию экрана с результатами в зависимости от правильности ответа
-    var nextVC: ((_ milestone: String?) -> Void)?
-    private let quiz = Quiz()
+    var nextVC: (() -> Void)?
+    ///Закрытие экрана пргресса
+    var closeProgress: (() -> Void)?
     private let questionIndex: Int
-    private let isCorrectAnswer: Bool
-    
-    
-    ///Хранит последнюю несгораемую сумму, если она была достигнута
-    private static var lastMilestone: String?
+    private let isCorrectAnswer: Bool?
+    private let exitButton = UIButton(type: .system)
     
     private let background = UIImageView()
     private let logo = UIImageView()
     private let tableView = UITableView(frame: CGRect(), style: .plain)
     
-    init(questionIndex: Int, isCorrectAnswer: Bool) {
+    init(questionIndex: Int, isCorrectAnswer: Bool?) {
         self.questionIndex = questionIndex
         self.isCorrectAnswer = isCorrectAnswer
         super.init(frame: .zero)
         //Сохраняем несгораемую сумму, если она была достигнута
-        if quiz.milestoneSums.contains(quiz.sums.map { $0.value }[questionIndex]) && isCorrectAnswer {
-            ResultView.lastMilestone = quiz.sums[questionIndex]
+        if let isCorrectAnswer {
+            if Quiz.milestoneSums.contains(Quiz.sums.map { $0.value }[questionIndex]) && isCorrectAnswer {
+                Quiz.lastMilestone = Quiz.sums[questionIndex]
+            }
+            //Тут пока временно сделала автоматическое закрытие экрана результатов и перехода на следующий экран через 5 секунд (время проигрывания звука верного/неверного ответа)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+                //Передаем в замыкание выхода с экрана результатов последнюю достигнутую несгораемую сумму, если она была достигнута. Для ее дальнейшей передачи и отображения на экране 'Game Over'
+                self?.nextVC?()
+            }
         }
+        
         setupUI()
         
-        //Тут пока временно сделала автоматическое закрытие экрана результатов и перехода на следующий экран через 5 секунд (время проигрывания звука верного/неверного ответа)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
-            //Передаем в замыкание выхода с экрана результатов последнюю достигнутую несгораемую сумму, если она была достигнута. Для ее дальнейшей передачи и отображения на экране 'Game Over'
-            self?.nextVC?(ResultView.lastMilestone)
-        }
     }
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -58,9 +59,13 @@ class ResultView: UIView, UITableViewDataSource {
         tableView.dataSource = self
         tableView.backgroundColor = .clear
         
+        exitButton.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
+        exitButton.addTarget(self, action: #selector(exitTapped), for: .touchUpInside)
+        
         addSubview(background)
         addSubview(logo)
         addSubview(tableView)
+        addSubview(exitButton)
         subviews.forEach({$0.translatesAutoresizingMaskIntoConstraints = false})
         
         NSLayoutConstraint.activate([
@@ -75,30 +80,39 @@ class ResultView: UIView, UITableViewDataSource {
             tableView.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 20),
             tableView.leadingAnchor.constraint(equalTo: background.leadingAnchor, constant: 34),
             tableView.trailingAnchor.constraint(equalTo: background.trailingAnchor, constant: -34),
-            tableView.bottomAnchor.constraint(equalTo: background.bottomAnchor, constant: -34)
+            tableView.bottomAnchor.constraint(equalTo: background.bottomAnchor, constant: -34),
+            exitButton.topAnchor.constraint(equalTo: logo.topAnchor),
+            exitButton.trailingAnchor.constraint(equalTo: tableView.trailingAnchor)
         ])
         
+        if isCorrectAnswer != nil {
+            exitButton.isHidden = true
+        } else {
+            exitButton.isHidden = false
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        quiz.sums.count
+        Quiz.sums.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ResultTableViewCell
-        let sortedSums = quiz.sums.sorted { $0.key < $1.key }
+        let sortedSums = Quiz.sums.sorted { $0.key < $1.key }
         let isMilestone: Bool = {
-            quiz.milestoneSums.contains(sortedSums.map { $0.value }.reversed()[indexPath.row])
+            Quiz.milestoneSums.contains(sortedSums.map { $0.value }.reversed()[indexPath.row])
         }()
-        cell.setupUI(cellTotal: quiz.sums.count, questionIndex: questionIndex, rowNumber: indexPath.row, isCorrect: isCorrectAnswer, isMilestoneSum: isMilestone, sum: sortedSums.map { $0.value }.reversed()[indexPath.row])
+        var didPass = false
+        if Quiz.sums.count - (indexPath.row + 1) <= questionIndex {
+            didPass = true
+        }
+        cell.setupUI(cellTotal: Quiz.sums.count, questionIndex: questionIndex, rowNumber: indexPath.row, isCorrect: isCorrectAnswer, isMilestoneSum: isMilestone, sum: sortedSums.map { $0.value }.reversed()[indexPath.row], didPass: didPass)
         
         return cell
     }
     
-    ///Сбрасывает хранимую несгораемую сумму для начала новой игры
-    func restartResults() {
-        ResultView.lastMilestone = nil
+    @objc private func exitTapped(_ sender: UIButton) {
+        closeProgress?()
     }
-    
 }
 

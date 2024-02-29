@@ -20,8 +20,6 @@ class GameViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         //вот это перенесла из viewDidLoad сюда, чтобы вопросы обновлялись после возврата с экрана с таблицей со всеми вопросами
-        //но он не обновляет сейчас ))) метод отрабатывает, но в этом методе setupUI после первой его отработки дальше другие данные в mainView не сетятся
-        
         updateQuestionAndSum()
         SoundManager.shared.playSound(soundFileName: "zvukChasov")
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
@@ -30,10 +28,11 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mainView
-        
+        quiz.restartGame()
         
         answerButtonsTapped()
         exitButtonTapped()
+        showProgressButtonTapped()
         takeMoneyButtonTapped()
         
         help5050Button()
@@ -49,10 +48,16 @@ class GameViewController: UIViewController {
         mainView.buttonAnswerB.setTitle(quiz.getAnswers()[1], for: .normal)
         mainView.buttonAnswerC.setTitle(quiz.getAnswers()[2], for: .normal)
         mainView.buttonAnswerD.setTitle(quiz.getAnswers()[3], for: .normal)
+// <<<<<<< mariaNesterova
         normalColor()
-        mainView.questionNumberLabel.text = "Вопрос \(quiz.currentQuestionNumber)/15"
-        mainView.sumTotalLabel.text = quiz.sums[quiz.currentQuestionNumber]!
+        mainView.questionNumberLabel.text = "Вопрос \(quiz.currentQuestionNumber)/\(Quiz.sums.count)"
+        mainView.sumTotalLabel.text = Quiz.sums[quiz.currentQuestionNumber]!
+
         
+//         mainView.questionNumberLabel.text = "Вопрос \(quiz.currentQuestionNumber)/15"
+//         mainView.sumTotalLabel.text = quiz.sums[quiz.currentQuestionNumber]!
+        
+// >>>>>>> develop
     }
     //TODO: - дописать
     func answerButtonsTapped() {
@@ -130,16 +135,23 @@ class GameViewController: UIViewController {
         mainView.exitButton.addAction(tap, for: .touchUpInside)
     }
     
+    func showProgressButtonTapped() {
+        let tap = UIAction { _ in
+            print("show progress")
+            let vc = ResultViewController(questionNumber: self.quiz.currentQuestionNumber)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        mainView.showProgressButton.addAction(tap, for: .touchUpInside)
+    }
+    
     func takeMoneyButtonTapped() {
         let tap = UIAction { _ in
             print("take money")
-            //тут получается после выбора ответа и интригующей музыки на 5 секунд должен быть пуш на vc результатов, он оттуда сделает поп обратно через 5 секунд, если ответ верный, или запушит уже гейм овер vc
-            //нужно correctAnswer прокинуть сюда
-            
-            //TODO: я как понимаю здесь можно посмотреть текущий прогресс, показ ResultView без музыки
-            let vc = ResultViewController(questionNumber: self.quiz.currentQuestionNumber, isCorrectAnswer: true)
+            let vc = GameOverViewController(questionIndex: self.quiz.currentQuestionNumber - 1)
             self.navigationController?.pushViewController(vc, animated: true)
+            SoundManager.shared.stopSound()
         }
+        
         mainView.takeMoneyButton.addAction(tap, for: .touchUpInside)
     }
     

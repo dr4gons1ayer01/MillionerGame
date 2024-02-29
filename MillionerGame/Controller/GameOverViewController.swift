@@ -11,8 +11,8 @@ class GameOverViewController: UIViewController {
     
     private let gameOverView: GameOverView
     
-    init(questionIndex: Int, milestone: String?, wonMillion: Bool) {
-        gameOverView = GameOverView(questionIndex: questionIndex, milestone: milestone, wonMillion: wonMillion)
+    init(questionIndex: Int) {
+        gameOverView = GameOverView(questionIndex: questionIndex)
         super.init(nibName: nil, bundle: nil)
     }
     

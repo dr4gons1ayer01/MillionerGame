@@ -12,7 +12,7 @@ class GameView: UIView {
     // MARK: - UI Elements
     
     let backgroundImage = UIImageView(image: UIImage(named: "bgHumans"))
-    let takeMoneyButton = UIButton(type: .system)
+    let showProgressButton = UIButton(type: .system)
     let exitButton = UIButton(type: .system)
     let questionNumberLabel = UILabel(text: "Вопрос 3/15")
     let questionTextLabel = UILabel(text: "Which team of the first challenge is the best in this stream?")
@@ -29,6 +29,8 @@ class GameView: UIView {
     let buttonAnswerC = UIButton(text: "C: Answer Three")
     let buttonAnswerD = UIButton(text: "D: Answer Fourth")
     
+    let takeMoneyButton = UIButton(type: .system)
+    
     
     // MARK: - Initialization
     
@@ -41,7 +43,7 @@ class GameView: UIView {
     
     func setupUI() {
         
-        takeMoneyButton.setImage(UIImage(systemName: "dollarsign.circle"), for: .normal)
+        showProgressButton.setImage(UIImage(systemName: "dollarsign.circle"), for: .normal)
         exitButton.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
         
         timerProgress.layer.cornerRadius = 5
@@ -55,9 +57,12 @@ class GameView: UIView {
         helpPhoneButton.setImage(UIImage(systemName: "phone"), for: .normal)
         helpHumansButton.setImage(UIImage(systemName: "person.3.fill"), for: .normal)
         
+        takeMoneyButton.setTitle("Забрать деньги", for: .normal)
+        takeMoneyButton.titleLabel?.font = UIFont(name: "Gilroy-Regular", size: 25)
+        
         let topStack = UIStackView(views: [exitButton,
                                            questionNumberLabel,
-                                           takeMoneyButton],
+                                           showProgressButton],
                                    axis: .horizontal,
                                    spacing: 50)
         
@@ -85,10 +90,12 @@ class GameView: UIView {
                                     spacing: 10)
         addSubview(backgroundImage)
         addSubview(mainStack)
+        addSubview(takeMoneyButton)
         
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
         mainStack.distribution = .equalSpacing
         mainStack.translatesAutoresizingMaskIntoConstraints = false
+        takeMoneyButton.translatesAutoresizingMaskIntoConstraints = false
         
         // MARK: - Constraints
         
@@ -108,6 +115,9 @@ class GameView: UIView {
             timerProgress.trailingAnchor.constraint(equalTo: mainStack.trailingAnchor),
             
             questionTextLabel.heightAnchor.constraint(equalToConstant: 200),
+            
+            takeMoneyButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            takeMoneyButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
             
         ])
 
