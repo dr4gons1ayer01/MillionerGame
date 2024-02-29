@@ -246,7 +246,7 @@ class GameViewController: UIViewController {
             SoundManager.shared.playSound(soundFileName: "zvukNepravilnogo")
             timer.invalidate()
             secondPassed = 0
-            let vc = GameOverViewController(questionIndex: 0, milestone: "0" , wonMillion: false)
+            let vc = GameOverViewController(questionIndex: 0)
             navigationController?.pushViewController(vc, animated: true)
         }
     }
