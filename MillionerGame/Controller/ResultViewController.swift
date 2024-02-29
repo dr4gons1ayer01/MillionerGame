@@ -15,7 +15,7 @@ class ResultViewController: UIViewController {
     private var wonMillion = false
     
     init(questionNumber: Int, isCorrectAnswer: Bool) {
-        self.questionIndex = questionNumber - 1
+        self.questionIndex = questionNumber - 2
         self.isCorrectAnswer = isCorrectAnswer
         resultView = ResultView(questionIndex: questionIndex, isCorrectAnswer: isCorrectAnswer)
         super.init(nibName: nil, bundle: nil)

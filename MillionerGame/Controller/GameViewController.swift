@@ -117,9 +117,7 @@ class GameViewController: UIViewController {
         }
         mainView.takeMoneyButton.addAction(tap, for: .touchUpInside)
     }
-    
-    
-    
+
     //TODO: таймер доделать
     
     
