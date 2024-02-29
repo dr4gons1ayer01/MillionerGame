@@ -11,7 +11,7 @@ class GameViewController: UIViewController {
     let mainView = GameView()
     var quiz = Quiz()
     var timer = Timer()
-    var secondTotal = 5
+    var secondTotal = 10
     var secondPassed = 0
     
     
@@ -35,6 +35,7 @@ class GameViewController: UIViewController {
         answerButtonsTapped()
         exitButtonTapped()
         takeMoneyButtonTapped()
+        
         help5050Button()
         helpPhoneButton()
         helpHumansButton()
@@ -55,9 +56,8 @@ class GameViewController: UIViewController {
     }
     //TODO: - дописать
     func answerButtonsTapped() {
-        
         let tap = UIAction { action in
-           
+            
             guard let button = action.sender as? UIButton else { return }
             //смена цвета при выборе ответа
             button.setBackgroundImage(UIImage(named: "Rectangle 4"), for: .normal)
@@ -76,11 +76,11 @@ class GameViewController: UIViewController {
             default:
                 return
             }
-        
+            
             
             let isCorrectAnswer = self.quiz.checkAnswer(answerIndex)
             if isCorrectAnswer {
-               
+                
                 print("Верный ответ!")
                 ///
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
@@ -94,7 +94,7 @@ class GameViewController: UIViewController {
                 SoundManager.shared.playSound(soundFileName: "otvetPrinyat")
                 
             } else {
-             
+                
                 print("Неверный ответ!")
                 ///
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
@@ -148,14 +148,14 @@ class GameViewController: UIViewController {
         let tap = UIAction { action in
             guard let button = action.sender as? UIButton else { return }
             
-            var arrayOfButtons = [self.mainView.buttonAnswerA, 
+            var arrayOfButtons = [self.mainView.buttonAnswerA,
                                   self.mainView.buttonAnswerB,
                                   self.mainView.buttonAnswerC,
                                   self.mainView.buttonAnswerD]
             
             let indexOfRight = self.quiz.getRightAnswerIndex()
             arrayOfButtons.remove(at: indexOfRight)
-            arrayOfButtons.remove(at: Int.random(in: 0...3))
+//            arrayOfButtons.remove(at: Int.random(in: 0...3))    //ошибка
             arrayOfButtons[0].setTitle(nil, for: .normal)
             arrayOfButtons[1].setTitle(nil, for: .normal)
             
@@ -170,7 +170,7 @@ class GameViewController: UIViewController {
         let tap = UIAction { action in
             guard let button = action.sender as? UIButton else { return }
             
-            var arrayOfButtons = [self.mainView.buttonAnswerA, 
+            var arrayOfButtons = [self.mainView.buttonAnswerA,
                                   self.mainView.buttonAnswerB,
                                   self.mainView.buttonAnswerC,
                                   self.mainView.buttonAnswerD]
@@ -208,7 +208,7 @@ class GameViewController: UIViewController {
                 arrayOfButtons.remove(at: indexOfRight)
                 arrayOfButtons[Int.random(in: 0...2)].setBackgroundImage(UIImage(named: "Rectangle 2"), for: .normal)
             }
-    
+            
             button.backgroundColor = .red
             button.isEnabled = false
             
@@ -225,7 +225,19 @@ class GameViewController: UIViewController {
     
     
     //TODO: таймер доделать
-    
+    @objc func updateTimer() {
+        if secondPassed < secondTotal {
+            secondPassed += 1
+            let percentageProgress = Float(secondPassed) / Float(secondTotal)
+            mainView.timerProgress.setProgress(percentageProgress, animated: true)
+        } else {
+            SoundManager.shared.playSound(soundFileName: "zvukNepravilnogo")
+            timer.invalidate()
+            secondPassed = 0
+            let vc = GameOverViewController(questionIndex: 0, milestone: "0" , wonMillion: false)
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
     
 }
 
