@@ -10,6 +10,9 @@ import UIKit
 class GameViewController: UIViewController {
     let mainView = GameView()
     var quiz = Quiz()
+    var timer = Timer()
+    var secondTotal = 5
+    var secondPassed = 0
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -21,6 +24,7 @@ class GameViewController: UIViewController {
         
         updateQuestionAndSum()
         SoundManager.shared.playSound(soundFileName: "zvukChasov")
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
     }
     
     override func viewDidLoad() {
@@ -47,11 +51,17 @@ class GameViewController: UIViewController {
         normalColor()
         mainView.questionNumberLabel.text = "Вопрос \(quiz.currentQuestionNumber)/15"
         mainView.sumTotalLabel.text = quiz.sums[quiz.currentQuestionNumber]!
+        
     }
     //TODO: - дописать
     func answerButtonsTapped() {
+        
         let tap = UIAction { action in
+           
             guard let button = action.sender as? UIButton else { return }
+            //смена цвета при выборе ответа
+            button.setBackgroundImage(UIImage(named: "Rectangle 4"), for: .normal)
+            self.updateTimer()
             
             let answerIndex: Int
             switch button {
@@ -66,29 +76,39 @@ class GameViewController: UIViewController {
             default:
                 return
             }
+        
             
             let isCorrectAnswer = self.quiz.checkAnswer(answerIndex)
             if isCorrectAnswer {
+               
                 print("Верный ответ!")
                 ///
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    
                     self.updateQuestionAndSum()
                     SoundManager.shared.stopSound()
                     let vc = ResultViewController(questionNumber: self.quiz.currentQuestionNumber, isCorrectAnswer: true)
                     self.navigationController?.pushViewController(vc, animated: true)
+                    button.setBackgroundImage(UIImage(named: "Rectangle 1"), for: .normal)
                 }
                 SoundManager.shared.playSound(soundFileName: "otvetPrinyat")
                 
             } else {
+             
                 print("Неверный ответ!")
                 ///
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     SoundManager.shared.stopSound()
                     let vc = ResultViewController(questionNumber: self.quiz.currentQuestionNumber, isCorrectAnswer: false)
                     self.navigationController?.pushViewController(vc, animated: true)
+                    button.setBackgroundImage(UIImage(named: "Rectangle 1"), for: .normal)
                 }
                 SoundManager.shared.playSound(soundFileName: "otvetPrinyat")
+                
             }
+            //сбрасываем таймер
+            self.secondPassed = 0
+            self.timer.invalidate()
         }
         mainView.buttonAnswerA.addAction(tap, for: .touchUpInside)
         mainView.buttonAnswerB.addAction(tap, for: .touchUpInside)
