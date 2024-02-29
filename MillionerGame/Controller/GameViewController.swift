@@ -31,6 +31,10 @@ class GameViewController: UIViewController {
         answerButtonsTapped()
         exitButtonTapped()
         takeMoneyButtonTapped()
+        help5050Button()
+        helpPhoneButton()
+        helpHumansButton()
+        
     }
     
     ///обновление вопросов и сумм
@@ -40,6 +44,7 @@ class GameViewController: UIViewController {
         mainView.buttonAnswerB.setTitle(quiz.getAnswers()[1], for: .normal)
         mainView.buttonAnswerC.setTitle(quiz.getAnswers()[2], for: .normal)
         mainView.buttonAnswerD.setTitle(quiz.getAnswers()[3], for: .normal)
+        normalColor()
         mainView.questionNumberLabel.text = "Вопрос \(quiz.currentQuestionNumber)/15"
         mainView.sumTotalLabel.text = quiz.sums[quiz.currentQuestionNumber]!
     }
@@ -117,7 +122,88 @@ class GameViewController: UIViewController {
         }
         mainView.takeMoneyButton.addAction(tap, for: .touchUpInside)
     }
-
+    
+    //пока что кнопки будут красными, когда их нельзя выбрать, когда Маша все отрисует, сделаем иначе
+    func help5050Button() {
+        let tap = UIAction { action in
+            guard let button = action.sender as? UIButton else { return }
+            
+            var arrayOfButtons = [self.mainView.buttonAnswerA, 
+                                  self.mainView.buttonAnswerB,
+                                  self.mainView.buttonAnswerC,
+                                  self.mainView.buttonAnswerD]
+            
+            let indexOfRight = self.quiz.getRightAnswerIndex()
+            arrayOfButtons.remove(at: indexOfRight)
+            arrayOfButtons.remove(at: Int.random(in: 0...3))
+            arrayOfButtons[0].setTitle(nil, for: .normal)
+            arrayOfButtons[1].setTitle(nil, for: .normal)
+            
+            button.backgroundColor = .red
+            button.isEnabled = false
+        }
+        mainView.help5050Button.addAction(tap, for: .touchUpInside)
+        
+    }
+    
+    func helpPhoneButton() {
+        let tap = UIAction { action in
+            guard let button = action.sender as? UIButton else { return }
+            
+            var arrayOfButtons = [self.mainView.buttonAnswerA, 
+                                  self.mainView.buttonAnswerB,
+                                  self.mainView.buttonAnswerC,
+                                  self.mainView.buttonAnswerD]
+            
+            let indexOfRight = self.quiz.getRightAnswerIndex()
+            let probability = Int.random(in: 1...100)
+            
+            switch probability {
+            case 1...70:
+                arrayOfButtons[indexOfRight].setBackgroundImage(UIImage(named: "Rectangle 2"), for: .normal)
+            default:
+                arrayOfButtons.remove(at: indexOfRight)
+                arrayOfButtons[Int.random(in: 0...2)].setBackgroundImage(UIImage(named: "Rectangle 2"), for: .normal)
+            }
+            
+            button.backgroundColor = .red
+            button.isEnabled = false
+            
+        }
+        mainView.helpPhoneButton.addAction(tap, for: .touchUpInside)
+    }
+    
+    
+    func helpHumansButton() {
+        let tap = UIAction { action in
+            guard let button = action.sender as? UIButton else { return }
+            
+            var arrayOfButtons = [self.mainView.buttonAnswerA, self.mainView.buttonAnswerB, self.mainView.buttonAnswerC, self.mainView.buttonAnswerD]
+            let indexOfRight = self.quiz.getRightAnswerIndex()
+            let probability = Int.random(in: 1...100)
+            switch probability {
+            case 1...80:
+                arrayOfButtons[indexOfRight].setBackgroundImage(UIImage(named: "Rectangle 2"), for: .normal)
+            default:
+                arrayOfButtons.remove(at: indexOfRight)
+                arrayOfButtons[Int.random(in: 0...2)].setBackgroundImage(UIImage(named: "Rectangle 2"), for: .normal)
+            }
+    
+            button.backgroundColor = .red
+            button.isEnabled = false
+            
+        }
+        mainView.helpHumansButton.addAction(tap, for: .touchUpInside)
+    }
+    
+    func normalColor() {
+        self.mainView.buttonAnswerA.setBackgroundImage(UIImage(named: "Rectangle 1"), for: .normal)
+        self.mainView.buttonAnswerB.setBackgroundImage(UIImage(named: "Rectangle 1"), for: .normal)
+        self.mainView.buttonAnswerC.setBackgroundImage(UIImage(named: "Rectangle 1"), for: .normal)
+        self.mainView.buttonAnswerD.setBackgroundImage(UIImage(named: "Rectangle 1"), for: .normal)
+    }
+    
+    
     //TODO: таймер доделать
     
     

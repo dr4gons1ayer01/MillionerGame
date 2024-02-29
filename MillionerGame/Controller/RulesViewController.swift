@@ -23,18 +23,6 @@ class RulesViewController: UIViewController {
             self.dismiss(animated: true)
         }
         mainView.homeButton.addAction(tap, for: .touchUpInside)
-       
-        //    func rules() {
-        //        let tap = UIAction { _ in
-        //            print("переход в правила")
-        //
-        //            let vc = RulesViewController()
-        //            self.present(vc, animated: true)
-        //        }
-        //        mainView.rulesButton.addAction(tap, for: .touchUpInside)
-        //    }
-        //
-        
         
     }
 }
