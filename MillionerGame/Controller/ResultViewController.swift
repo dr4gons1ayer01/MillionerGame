@@ -13,7 +13,11 @@ class ResultViewController: UIViewController {
     private let isCorrectAnswer: Bool?
     private let resultView: ResultView
     
+// <<<<<<< mariaNesterova
     init(questionNumber: Int, isCorrectAnswer: Bool? = nil) {
+// =======
+//     init(questionNumber: Int, isCorrectAnswer: Bool) {
+// >>>>>>> develop
         self.questionIndex = questionNumber - 2
         self.isCorrectAnswer = isCorrectAnswer
         resultView = ResultView(questionIndex: questionIndex, isCorrectAnswer: isCorrectAnswer)

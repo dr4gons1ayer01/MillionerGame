@@ -54,7 +54,9 @@ struct Quiz {
     
     init() {
         //Перемешиваем вопросы в каждой секции перед началом игры
-        questions = [easyQuestions.shuffled(), mediumQuestion.shuffled(), hardQuestions.shuffled()]
+        questions = [easyQuestions.shuffled(), 
+                     mediumQuestion.shuffled(),
+                     hardQuestions.shuffled()]
     }
     
     func getQuestion() -> String {
@@ -69,6 +71,11 @@ struct Quiz {
         let result = answer == questions[currentQuestionSection][currentQuestionIndexInSection].correctAnswerIndex
         nextQuestion()
         return result
+    }
+    
+    func getRightAnswerIndex() -> Int  {
+        let index = questions[currentQuestionSection][currentQuestionIndexInSection].correctAnswerIndex
+        return index
     }
     
     //Переход к следующему вопросу
