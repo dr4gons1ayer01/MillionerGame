@@ -52,7 +52,9 @@ struct Quiz {
     
     init() {
         //Перемешиваем вопросы в каждой секции перед началом игры
-        questions = [easyQuestions.shuffled(), mediumQuestion.shuffled(), hardQuestions.shuffled()]
+        questions = [easyQuestions.shuffled(), 
+                     mediumQuestion.shuffled(),
+                     hardQuestions.shuffled()]
     }
     
     func getQuestion() -> String {

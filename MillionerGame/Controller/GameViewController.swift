@@ -128,7 +128,11 @@ class GameViewController: UIViewController {
         let tap = UIAction { action in
             guard let button = action.sender as? UIButton else { return }
             
-            var arrayOfButtons = [self.mainView.buttonAnswerA, self.mainView.buttonAnswerB, self.mainView.buttonAnswerC, self.mainView.buttonAnswerD]
+            var arrayOfButtons = [self.mainView.buttonAnswerA, 
+                                  self.mainView.buttonAnswerB,
+                                  self.mainView.buttonAnswerC,
+                                  self.mainView.buttonAnswerD]
+            
             let indexOfRight = self.quiz.getRightAnswerIndex()
             arrayOfButtons.remove(at: indexOfRight)
             arrayOfButtons.remove(at: Int.random(in: 0...3))
@@ -146,7 +150,11 @@ class GameViewController: UIViewController {
         let tap = UIAction { action in
             guard let button = action.sender as? UIButton else { return }
             
-            var arrayOfButtons = [self.mainView.buttonAnswerA, self.mainView.buttonAnswerB, self.mainView.buttonAnswerC, self.mainView.buttonAnswerD]
+            var arrayOfButtons = [self.mainView.buttonAnswerA, 
+                                  self.mainView.buttonAnswerB,
+                                  self.mainView.buttonAnswerC,
+                                  self.mainView.buttonAnswerD]
+            
             let indexOfRight = self.quiz.getRightAnswerIndex()
             let probability = Int.random(in: 1...100)
             
