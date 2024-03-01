@@ -16,27 +16,22 @@ class GameOverView: UIView {
     ///Несгораемая сумма для экрана 'Game Over', если она была достигнута
     private var milestone: String?
     private let wonMillion: Bool
+    private let tookMoney: Bool
 
     private let background = UIImageView(image: UIImage(named: "bg")!)
     private let logo = UIImageView()
-    private let gameOverLabel = UILabel(text: "ИГРА ЗАКОНЧЕНА")
+    private let gameOverLabel = UILabel(text: "ИГРА ОКОНЧЕНА")
     private let milestoneLabel = UILabel()
     private let emojiLabel = UILabel()
-    
-    private var loseLabel: UILabel {
-        let label = UILabel()
-        label.text = "Проигрыш на \(questionIndex + 1) вопросе"
-        label.font = UIFont(name: "Gilroy-Bold", size: 20)
-        label.textColor = .white
-        return label
-    }
+    private let loseLabel = UILabel()
 
     private let restartButton = UIButton(text: "Играть заново", alignment: .center)
     
-    init(questionIndex: Int) {
+    init(questionIndex: Int, tookMoney: Bool) {
         self.questionIndex = questionIndex
         self.milestone = Quiz.lastMilestone
         self.wonMillion = {Quiz.lastMilestone == "1 миллион"}()
+        self.tookMoney = tookMoney
         super.init(frame: .zero)
         setupUI()
     }
@@ -51,7 +46,16 @@ class GameOverView: UIView {
         gameOverLabel.font = UIFont(name: "Gilroy-Bold", size: 38)
         emojiLabel.font = .systemFont(ofSize: 250)
         
+        loseLabel.font = UIFont(name: "Gilroy-Bold", size: 20)
+        loseLabel.textColor = .white
         loseLabel.font = UIFont(name: "Gilroy-Regular", size: 20)
+        
+        if tookMoney {
+            loseLabel.text = "Взял деньги на \(questionIndex + 1) вопросе"
+        } else {
+            loseLabel.text = "Проигрыш на \(questionIndex + 1) вопросе"
+        }
+        
         
         restartButton.setBackgroundImage(UIImage(named: "Rectangle 3"), for: .normal)
         ///нажатие я бы в контроллер убрал
@@ -59,9 +63,14 @@ class GameOverView: UIView {
         
         //Проверяем, была ли достигнута несгораемая сумма, и в зависимости от этого показываем/не показываем текст с выигрышем и соответсвующим эмодзи
         if let milestone = milestone {
-            milestoneLabel.text = "Вы выиграли \(milestone)!"
+            milestoneLabel.isHidden = false
             milestoneLabel.textColor = .white
             emojiLabel.text = "💰"
+            if tookMoney {
+                milestoneLabel.text = "Вы забрали \(milestone)!"
+            } else {
+                milestoneLabel.text = "Вы выиграли \(milestone)!"
+            }
         } else {
             milestoneLabel.isHidden = true
             emojiLabel.text = "😓"
@@ -138,7 +147,7 @@ struct GameOverViewProvider: PreviewProvider {
         ContainerView().ignoresSafeArea()
     }
     struct ContainerView: UIViewRepresentable {
-        let view = GameOverView(questionIndex: 0)
+        let view = GameOverView(questionIndex: 0, tookMoney: false)
         
         func makeUIView(context: Context) -> some UIView {
             return view

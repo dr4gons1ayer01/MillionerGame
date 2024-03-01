@@ -13,8 +13,8 @@ class GameView: UIView {
     
     let backgroundImage = UIImageView(image: UIImage(named: "bgHumans"))
     ///поменять на картинки из ассетов
-    let showProgressButton = UIButton(imageNamed: "people_off", width: 90, height: 70)
-    let exitButton = UIButton(imageNamed: "people_off", width: 90, height: 70)
+    let showProgressButton = UIButton()
+    let exitButton = UIButton()
     
     let questionNumberLabel = UILabel(text: "Вопрос 3/15")
     let questionTextLabel = UILabel(text: "Which team of the first challenge is the best in this stream?")
@@ -43,7 +43,9 @@ class GameView: UIView {
     // MARK: - Setup UI
     
     func setupUI() {
-                
+        showProgressButton.setImage(.progress, for: .normal)
+        exitButton.setImage(.exit, for: .normal)
+        
         questionNumberLabel.textAlignment = .center
         
         sumTotalLabel.textAlignment = .center
@@ -61,17 +63,17 @@ class GameView: UIView {
         timerProgress.layer.borderColor = UIColor.white.cgColor
         timerProgress.trackTintColor = .systemGray
         ///тут  тоже цвет поменять
-        timerProgress.progressTintColor = .systemBlue
+        timerProgress.progressTintColor = UIColor(resource: .gameBlue)
         timerProgress.heightAnchor.constraint(equalToConstant: 13).isActive = true
         
-        takeMoneyButton.setBackgroundImage(UIImage(named: "Rectangle 3"), for: .normal)
+        takeMoneyButton.setBackgroundImage(UIImage(named: "Rectangle 6"), for: .normal)
         takeMoneyButton.contentHorizontalAlignment = .center
         
         let topStack = UIStackView(views: [exitButton,
                                            questionNumberLabel,
                                            showProgressButton],
                                    axis: .horizontal,
-                                   spacing: 30)
+                                   spacing: 44)
         
         let helpButtonsStackView = UIStackView(views: [help5050Button,
                                                        helpPhoneButton,
@@ -121,7 +123,10 @@ class GameView: UIView {
             timerProgress.trailingAnchor.constraint(equalTo: mainStack.trailingAnchor),
             
             questionTextLabel.heightAnchor.constraint(equalToConstant: 170),
-            
+            showProgressButton.heightAnchor.constraint(equalToConstant: 36),
+            showProgressButton.widthAnchor.constraint(equalTo: showProgressButton.heightAnchor),
+            exitButton.heightAnchor.constraint(equalToConstant: 40),
+            exitButton.widthAnchor.constraint(equalTo: exitButton.heightAnchor)
         ])
 
         

@@ -137,7 +137,7 @@ class GameViewController: UIViewController {
     func takeMoneyButtonTapped() {
         let tap = UIAction { _ in
             print("take money")
-            self.straightToGameOver()
+            self.straightToGameOver(tookMoney: true)
             self.stopTimer(stopSound: true)
         }
         
@@ -230,7 +230,7 @@ class GameViewController: UIViewController {
             if let navigationController = self.navigationController {
                 navigationController.popViewController(animated: true)
             }
-            SoundManager.shared.stopSound()
+            self.stopTimer(stopSound: true)
         }
         
         let returnGame = UIAlertAction(title: "Остаться", style: .cancel, handler: nil)
@@ -269,9 +269,14 @@ class GameViewController: UIViewController {
         }
     }
     
-    func straightToGameOver() {
-        let vc = GameOverViewController(questionIndex: self.quiz.currentQuestionNumber - 1)
-        navigationController?.pushViewController(vc, animated: true)
+    func straightToGameOver(tookMoney: Bool = false) {
+        if tookMoney {
+            let vc = GameOverViewController(questionIndex: self.quiz.currentQuestionNumber - 1, tookMoney: true)
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = GameOverViewController(questionIndex: self.quiz.currentQuestionNumber - 1)
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     func stopTimer(stopSound: Bool) {
