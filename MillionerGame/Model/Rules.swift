@@ -7,10 +7,6 @@
 
 import Foundation
 
-//let help5050 = UIImage((systemName: "50.circle"), for: .normal)
-//let helpPhone = UIImage(systemName: "phone"), for: .normal)
-//let helpHiman = UIImage(systemName: "person.3.fill"), for: .normal)
-
 let rules: String = """
 Для того чтобы заработать 1 миллион рублей, необходимо правильно ответить на 15 вопросов из различных областей знаний. Каждый вопрос имеет 4 варианта ответа, из которых только один является верным. Каждый вопрос имеет конкретную стоимость.
 Вопросы разделены на 3 уровня сложности:

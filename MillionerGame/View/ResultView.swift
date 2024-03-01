@@ -60,7 +60,8 @@ class ResultView: UIView, UITableViewDataSource {
         tableView.dataSource = self
         tableView.backgroundColor = .clear
         
-        exitButton.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
+        exitButton.setImage(UIImage(systemName: "arrowshape.turn.up.backward.fill"), for: .normal)
+        exitButton.tintColor = .white
         exitButton.addTarget(self, action: #selector(exitTapped), for: .touchUpInside)
         
         addSubview(background)

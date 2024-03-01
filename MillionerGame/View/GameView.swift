@@ -12,7 +12,6 @@ class GameView: UIView {
     // MARK: - UI Elements
     
     let backgroundImage = UIImageView(image: UIImage(named: "bgHumans"))
-    ///поменять на картинки из ассетов
     let showProgressButton = UIButton()
     let exitButton = UIButton()
     
@@ -49,20 +48,13 @@ class GameView: UIView {
         questionNumberLabel.textAlignment = .center
         
         sumTotalLabel.textAlignment = .center
-//        sumTotalLabel.layer.borderWidth = 2
-//        sumTotalLabel.layer.borderColor = UIColor.white.cgColor
-//        sumTotalLabel.layer.cornerRadius = 12
         sumTotalLabel.font = UIFont(name: "Gilroy-Bold", size: 25)
-        
-        ///решим делать ли бекграунд лейблу
-//        sumTotalLabel.backgroundColor
         sumTotalLabel.widthAnchor.constraint(equalToConstant: 220).isActive = true
         
         timerProgress.layer.cornerRadius = 5
         timerProgress.layer.borderWidth = 2
         timerProgress.layer.borderColor = UIColor.white.cgColor
         timerProgress.trackTintColor = .systemGray
-        ///тут  тоже цвет поменять
         timerProgress.progressTintColor = UIColor(resource: .gameBlue)
         timerProgress.heightAnchor.constraint(equalToConstant: 13).isActive = true
         

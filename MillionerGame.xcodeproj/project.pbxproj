@@ -26,7 +26,6 @@
 		BE0DCE172B8BBE4A00249D2E /* GameOverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE162B8BBE4A00249D2E /* GameOverView.swift */; };
 		BE0DCE192B8BC1A800249D2E /* RulesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE182B8BC1A800249D2E /* RulesViewController.swift */; };
 		BE0DCE1B2B8BC1B300249D2E /* RulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE1A2B8BC1B300249D2E /* RulesView.swift */; };
-		BE0DCE1D2B8BD2CF00249D2E /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE1C2B8BD2CF00249D2E /* Answer.swift */; };
 		BE0DCE1F2B8D4ED500249D2E /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE1E2B8D4ED500249D2E /* Quiz.swift */; };
 		BE0DCE2B2B8E1E5B00249D2E /* otvetPrinyat.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE0DCE262B8E1E5B00249D2E /* otvetPrinyat.mp3 */; };
 		BE0DCE2C2B8E1E5B00249D2E /* boleeKachestvennyiy.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE0DCE272B8E1E5B00249D2E /* boleeKachestvennyiy.mp3 */; };
@@ -37,6 +36,7 @@
 		BE0DCE342B91C65300249D2E /* UIButtonExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE332B91C65300249D2E /* UIButtonExt.swift */; };
 		BE0DCE362B91C68400249D2E /* UIStackViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE352B91C68400249D2E /* UIStackViewExt.swift */; };
 		BE0DCE382B91D4D900249D2E /* UILabelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE372B91D4D900249D2E /* UILabelExt.swift */; };
+		BE0DCE3A2B922B8600249D2E /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE392B922B8600249D2E /* CustomAlertViewController.swift */; };
 		CB7B1FD42B91EE4A00EEEF69 /* budilnik.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CB7B1FD32B91EE4900EEEF69 /* budilnik.mp3 */; };
 		CBCD61852B8D3E49005C8F54 /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCD61842B8D3E49005C8F54 /* ResultTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -63,7 +63,6 @@
 		BE0DCE162B8BBE4A00249D2E /* GameOverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverView.swift; sourceTree = "<group>"; };
 		BE0DCE182B8BC1A800249D2E /* RulesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewController.swift; sourceTree = "<group>"; };
 		BE0DCE1A2B8BC1B300249D2E /* RulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesView.swift; sourceTree = "<group>"; };
-		BE0DCE1C2B8BD2CF00249D2E /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		BE0DCE1E2B8D4ED500249D2E /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 		BE0DCE262B8E1E5B00249D2E /* otvetPrinyat.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = otvetPrinyat.mp3; sourceTree = "<group>"; };
 		BE0DCE272B8E1E5B00249D2E /* boleeKachestvennyiy.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = boleeKachestvennyiy.mp3; sourceTree = "<group>"; };
@@ -74,6 +73,7 @@
 		BE0DCE332B91C65300249D2E /* UIButtonExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExt.swift; sourceTree = "<group>"; };
 		BE0DCE352B91C68400249D2E /* UIStackViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExt.swift; sourceTree = "<group>"; };
 		BE0DCE372B91D4D900249D2E /* UILabelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExt.swift; sourceTree = "<group>"; };
+		BE0DCE392B922B8600249D2E /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertViewController.swift; sourceTree = "<group>"; };
 		CB7B1FD32B91EE4900EEEF69 /* budilnik.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = budilnik.mp3; sourceTree = "<group>"; };
 		CBCD61842B8D3E49005C8F54 /* ResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -137,6 +137,7 @@
 				BE0DCE122B8BBD8A00249D2E /* ResultViewController.swift */,
 				BE0DCE142B8BBE4100249D2E /* GameOverViewController.swift */,
 				BE0DCE182B8BC1A800249D2E /* RulesViewController.swift */,
+				BE0DCE392B922B8600249D2E /* CustomAlertViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -168,7 +169,6 @@
 			isa = PBXGroup;
 			children = (
 				BE0DCDF02B8B6A8E00249D2E /* Question.swift */,
-				BE0DCE1C2B8BD2CF00249D2E /* Answer.swift */,
 				BE0DCE1E2B8D4ED500249D2E /* Quiz.swift */,
 				5353F08C2B8CFB5B0088050A /* Rules.swift */,
 			);
@@ -296,8 +296,8 @@
 				BE0DCDF12B8B6A8E00249D2E /* Question.swift in Sources */,
 				BE0DCDDA2B8B687D00249D2E /* StartViewController.swift in Sources */,
 				BE0DCE0B2B8BBCE000249D2E /* GameView.swift in Sources */,
+				BE0DCE3A2B922B8600249D2E /* CustomAlertViewController.swift in Sources */,
 				BE0DCDD62B8B687D00249D2E /* AppDelegate.swift in Sources */,
-				BE0DCE1D2B8BD2CF00249D2E /* Answer.swift in Sources */,
 				BE0DCDD82B8B687D00249D2E /* SceneDelegate.swift in Sources */,
 				5353F08D2B8CFB5B0088050A /* Rules.swift in Sources */,
 				BE0DCE132B8BBD8A00249D2E /* ResultViewController.swift in Sources */,

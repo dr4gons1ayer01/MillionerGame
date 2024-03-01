@@ -11,9 +11,8 @@ class GameViewController: UIViewController {
     let mainView = GameView()
     var quiz = Quiz()
     var timer = Timer()
-    var secondTotal = 10
+    var secondTotal = 30
     var secondPassed = 0
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,7 +26,7 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mainView
-
+        
         quiz.restartGame()
         
         answerButtonsTapped()
@@ -51,7 +50,7 @@ class GameViewController: UIViewController {
         mainView.questionNumberLabel.text = "Вопрос \(quiz.currentQuestionNumber)/\(Quiz.sums.count)"
         mainView.sumTotalLabel.text = Quiz.sums[quiz.currentQuestionNumber]!
     }
-    //TODO: - дописать
+    ///
     func answerButtonsTapped() {
         let tap = UIAction { action in
             
@@ -78,7 +77,6 @@ class GameViewController: UIViewController {
             if isCorrectAnswer {
                 
                 print("Верный ответ!")
-                ///
                 /// подстветка зеленым при правильно ответе
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     SoundManager.shared.playSound(soundFileName: "otvetVernyiy")
@@ -98,12 +96,11 @@ class GameViewController: UIViewController {
                 
                 print("Неверный ответ!")
                 ///
-                ///
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                SoundManager.shared.playSound(soundFileName: "zvukNepravilnogo")
-                button.setBackgroundImage(UIImage(named: "Rectangle 5"), for: .normal)
-            }
-            
+                    SoundManager.shared.playSound(soundFileName: "zvukNepravilnogo")
+                    button.setBackgroundImage(UIImage(named: "Rectangle 5"), for: .normal)
+                }
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
                     //SoundManager.shared.stopSound()
                     let vc = ResultViewController(questionNumber: self.quiz.currentQuestionNumber, isCorrectAnswer: false)
@@ -114,8 +111,8 @@ class GameViewController: UIViewController {
                 
             }
             ///сбрасываем таймер
-//            self.secondPassed = 0
-//            self.timer.invalidate()
+            //            self.secondPassed = 0
+            //            self.timer.invalidate()
             self.stopTimer(stopSound: false)
         }
         mainView.buttonAnswerA.addAction(tap, for: .touchUpInside)
@@ -123,7 +120,7 @@ class GameViewController: UIViewController {
         mainView.buttonAnswerC.addAction(tap, for: .touchUpInside)
         mainView.buttonAnswerD.addAction(tap, for: .touchUpInside)
     }
-
+    ///
     func showProgressButtonTapped() {
         let tap = UIAction { _ in
             print("show progress")
@@ -133,14 +130,27 @@ class GameViewController: UIViewController {
         }
         mainView.showProgressButton.addAction(tap, for: .touchUpInside)
     }
-    //TODO: - доделать
+    ///алерт по кнопке выйти
+    func exitButton() {
+        let tap = UIAction { _ in
+            let customAlert = CustomAlertViewController()
+            customAlert.exitAction = {
+                let vc = StartViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
+                self.stopTimer(stopSound: true)
+                print("выход")
+            }
+            self.present(customAlert, animated: true, completion: nil)
+        }
+        mainView.exitButton.addAction(tap, for: .touchUpInside)
+    }
+    ///забрать деньги
     func takeMoneyButtonTapped() {
         let tap = UIAction { _ in
-            print("take money")
+            print("забрать деньги")
             self.straightToGameOver(tookMoney: true)
             self.stopTimer(stopSound: true)
         }
-        
         mainView.takeMoneyButton.addAction(tap, for: .touchUpInside)
     }
     ///
@@ -162,7 +172,6 @@ class GameViewController: UIViewController {
             button.isEnabled = false
         }
         mainView.help5050Button.addAction(tap, for: .touchUpInside)
-        
     }
     ///
     func helpPhoneButton() {
@@ -186,7 +195,6 @@ class GameViewController: UIViewController {
             }
             button.setImage(UIImage(named: "call_off"), for: .normal)
             button.isEnabled = false
-            
         }
         mainView.helpPhoneButton.addAction(tap, for: .touchUpInside)
     }
@@ -207,41 +215,10 @@ class GameViewController: UIViewController {
             }
             button.setImage(UIImage(named: "people_off"), for: .normal)
             button.isEnabled = false
-            
         }
         mainView.helpHumansButton.addAction(tap, for: .touchUpInside)
     }
-    func exitButton() {
-        let tap = UIAction { _ in
-            self.exitAlert() }
-        self.mainView.exitButton.addAction(tap, for: .touchUpInside)
-    }
-    
-    func exitAlert() {
-        let alert = UIAlertController(title: "Выход", message: "Вы хотите выйти?", preferredStyle: .alert)
-        
-        //если оставить один first?.subviews, будет некрасиво!
-        
-        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor.init(red: 0.676261723, green: 0.6663312316, blue: 0.5041431785, alpha: 1)
-    
-        alert.view.layer.cornerRadius = 25
-        
-        let exitGame = UIAlertAction(title: "Выйти", style: .default) { _ in
-            if let navigationController = self.navigationController {
-                navigationController.popViewController(animated: true)
-            }
-            self.stopTimer(stopSound: true)
-        }
-        
-        let returnGame = UIAlertAction(title: "Остаться", style: .cancel, handler: nil)
-        
-        alert.addAction(exitGame)
-        alert.addAction(returnGame)
-        
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    ///
+    ///возвращает цвет кнопок
     func normalColor() {
         self.mainView.buttonAnswerA.setBackgroundImage(UIImage(named: "Rectangle 1"), for: .normal)
         self.mainView.buttonAnswerB.setBackgroundImage(UIImage(named: "Rectangle 1"), for: .normal)
@@ -268,7 +245,7 @@ class GameViewController: UIViewController {
             }
         }
     }
-    
+    ///переход  в gameOver
     func straightToGameOver(tookMoney: Bool = false) {
         if tookMoney {
             let vc = GameOverViewController(questionIndex: self.quiz.currentQuestionNumber - 1, tookMoney: true)
@@ -278,7 +255,7 @@ class GameViewController: UIViewController {
             navigationController?.pushViewController(vc, animated: true)
         }
     }
-    
+    ///
     func stopTimer(stopSound: Bool) {
         timer.invalidate()
         secondPassed = 0
@@ -288,7 +265,5 @@ class GameViewController: UIViewController {
     }
     
 }
-
-
 
 

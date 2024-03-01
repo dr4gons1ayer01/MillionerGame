@@ -16,8 +16,6 @@ class ResultViewController: UIViewController {
 
     init(questionNumber: Int, isCorrectAnswer: Bool? = nil) {
 
-//     init(questionNumber: Int, isCorrectAnswer: Bool) {
-
         self.questionIndex = questionNumber - 2
         self.isCorrectAnswer = isCorrectAnswer
         resultView = ResultView(questionIndex: questionIndex, isCorrectAnswer: isCorrectAnswer)
