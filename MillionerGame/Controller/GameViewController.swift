@@ -19,7 +19,6 @@ class GameViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-        //вот это перенесла из viewDidLoad сюда, чтобы вопросы обновлялись после возврата с экрана с таблицей со всеми вопросами
         updateQuestionAndSum()
         SoundManager.shared.playSound(soundFileName: "zvukChasov")
         startTimer()
@@ -28,19 +27,17 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mainView
-        ///не совсем понял зачем от  здесь?
-        //        quiz.restartGame()
+
+        quiz.restartGame()
         
         answerButtonsTapped()
-        //        exitButtonTapped()
+        exitButton()
         showProgressButtonTapped()
         takeMoneyButtonTapped()
         
         help5050Button()
         helpPhoneButton()
         helpHumansButton()
-        
-        exitButton()
         
     }
     ///обновление вопросов и сумм
@@ -114,26 +111,13 @@ class GameViewController: UIViewController {
         mainView.buttonAnswerC.addAction(tap, for: .touchUpInside)
         mainView.buttonAnswerD.addAction(tap, for: .touchUpInside)
     }
-    
-    
-    //    func exitButtonTapped() {
-    //        let tap = UIAction { _ in
-    //            //TODO: -  По желанию можно алерт сделать
-    //            if let navigationController = self.navigationController {
-    //                navigationController.popViewController(animated: true)
-    //            } else {
-    //                self.dismiss(animated: true, completion: nil)
-    //            }
-    //            SoundManager.shared.stopSound()
-    //        }
-    //        mainView.exitButton.addAction(tap, for: .touchUpInside)
-    //    }
-    
+
     func showProgressButtonTapped() {
         let tap = UIAction { _ in
             print("show progress")
             let vc = ResultViewController(questionNumber: self.quiz.currentQuestionNumber)
-            self.navigationController?.pushViewController(vc, animated: true)
+            vc.dismissProgress = {self.dismiss(animated: true)}
+            self.present(vc, animated: true)
         }
         mainView.showProgressButton.addAction(tap, for: .touchUpInside)
     }
@@ -141,9 +125,10 @@ class GameViewController: UIViewController {
     func takeMoneyButtonTapped() {
         let tap = UIAction { _ in
             print("take money")
-            let vc = GameOverViewController(questionIndex: self.quiz.currentQuestionNumber - 1)
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.timer.invalidate()
+            self.straightToGameOver()
             SoundManager.shared.stopSound()
+            self.secondPassed = 0
         }
         
         mainView.takeMoneyButton.addAction(tap, for: .touchUpInside)
@@ -264,13 +249,19 @@ class GameViewController: UIViewController {
             let percentageProgress = Float(secondPassed) / Float(secondTotal)
             mainView.timerProgress.setProgress(percentageProgress, animated: true)
         } else {
-            //            SoundManager.shared.playSound(soundFileName: "zvukNepravilnogo")
             SoundManager.shared.stopSound()
+            SoundManager.shared.playSound(soundFileName: "budilnik")
             timer.invalidate()
-            secondPassed = 0
-            let vc = GameOverViewController(questionIndex: self.quiz.currentQuestionNumber - 1)
-            navigationController?.pushViewController(vc, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+                self?.straightToGameOver()
+                self?.secondPassed = 0
+            }
         }
+    }
+    
+    func straightToGameOver() {
+        let vc = GameOverViewController(questionIndex: self.quiz.currentQuestionNumber - 1)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

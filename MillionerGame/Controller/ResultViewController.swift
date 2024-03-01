@@ -12,7 +12,7 @@ class ResultViewController: UIViewController {
     private let questionIndex: Int
     private let isCorrectAnswer: Bool?
     private let resultView: ResultView
-    
+    var dismissProgress: (() -> Void)?
 
     init(questionNumber: Int, isCorrectAnswer: Bool? = nil) {
 
@@ -35,12 +35,7 @@ class ResultViewController: UIViewController {
         setup()
         
     }
-    ///остановка звука по закрытии вью
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-//        SoundManager.shared.stopSound()
-    }
-
+    
     private func quitResults() {
         guard let isCorrectAnswer else { return }
         if isCorrectAnswer {
@@ -67,7 +62,7 @@ class ResultViewController: UIViewController {
     private func closeProgress() {
         //Просто закрываем экран прогресса и возвращаемся на game vc
         print("возврат на экран вопросов из таблицы с просмотром прогресса")
-        navigationController?.popViewController(animated: true)
+        dismissProgress?()
     }
     
     private func setup() {
