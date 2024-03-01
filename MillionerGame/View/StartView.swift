@@ -11,8 +11,8 @@ class StartView: UIView {
     let backgroundImage = UIImageView(image: UIImage(named: "bg")!)
     let logoImage = UIImageView(image: UIImage(named: "logo")!)
     let mainLabel = UILabel()
-    let rulesButton = UIButton(title: "Правила игры", bg: .systemGreen)
-    let startButton = UIButton(title: "Начало игры", bg: .systemGreen)
+    let rulesButton = UIButton(text: "Правила игры", alignment: .center)
+    let startButton = UIButton(text: "Начало игры", alignment: .center)
     
     init() {
         super.init(frame: CGRect())

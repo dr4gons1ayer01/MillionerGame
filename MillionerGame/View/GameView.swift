@@ -12,25 +12,26 @@ class GameView: UIView {
     // MARK: - UI Elements
     
     let backgroundImage = UIImageView(image: UIImage(named: "bgHumans"))
-    let showProgressButton = UIButton(type: .system)
-    let exitButton = UIButton(type: .system)
+    ///поменять на картинки из ассетов
+    let showProgressButton = UIButton(imageNamed: "people_off", width: 90, height: 70)
+    let exitButton = UIButton(imageNamed: "people_off", width: 90, height: 70)
+    
     let questionNumberLabel = UILabel(text: "Вопрос 3/15")
     let questionTextLabel = UILabel(text: "Which team of the first challenge is the best in this stream?")
     let sumTotalLabel = UILabel(text: "100 RUB")
     
     let timerProgress = UIProgressView()
     
-    let help5050Button = UIButton(type: .system)
-    let helpPhoneButton = UIButton(type: .system)
-    let helpHumansButton = UIButton(type: .system)
+    let help5050Button = UIButton(imageNamed: "5050", width: 90, height: 70)
+    let helpPhoneButton = UIButton(imageNamed: "call", width: 90, height: 70)
+    let helpHumansButton = UIButton(imageNamed: "people", width: 90, height: 70)
     
-    let buttonAnswerA = UIButton(text: "A: Answer One")
-    let buttonAnswerB = UIButton(text: "B: Answer Two")
-    let buttonAnswerC = UIButton(text: "C: Answer Three")
-    let buttonAnswerD = UIButton(text: "D: Answer Fourth")
+    let buttonAnswerA = UIButton(text: "A: Answer One", alignment: .leading)
+    let buttonAnswerB = UIButton(text: "B: Answer Two", alignment: .leading)
+    let buttonAnswerC = UIButton(text: "C: Answer Three", alignment: .leading)
+    let buttonAnswerD = UIButton(text: "D: Answer Fourth", alignment: .leading)
     
-    let takeMoneyButton = UIButton(type: .system)
-    
+    let takeMoneyButton = UIButton(text: "Забрать деньги", alignment: .center)
     
     // MARK: - Initialization
     
@@ -42,60 +43,64 @@ class GameView: UIView {
     // MARK: - Setup UI
     
     func setupUI() {
+                
+        questionNumberLabel.textAlignment = .center
         
-        showProgressButton.setImage(UIImage(systemName: "dollarsign.circle"), for: .normal)
-        exitButton.setImage(UIImage(systemName: "xmark.circle"), for: .normal)
+        sumTotalLabel.textAlignment = .center
+//        sumTotalLabel.layer.borderWidth = 2
+//        sumTotalLabel.layer.borderColor = UIColor.white.cgColor
+//        sumTotalLabel.layer.cornerRadius = 12
+        sumTotalLabel.font = UIFont(name: "Gilroy-Bold", size: 25)
+        
+        ///решим делать ли бекграунд лейблу
+//        sumTotalLabel.backgroundColor
+        sumTotalLabel.widthAnchor.constraint(equalToConstant: 220).isActive = true
         
         timerProgress.layer.cornerRadius = 5
         timerProgress.layer.borderWidth = 2
         timerProgress.layer.borderColor = UIColor.white.cgColor
         timerProgress.trackTintColor = .systemGray
-        timerProgress.progressTintColor = .systemCyan
+        ///тут  тоже цвет поменять
+        timerProgress.progressTintColor = .systemBlue
         timerProgress.heightAnchor.constraint(equalToConstant: 13).isActive = true
         
-        help5050Button.setImage(UIImage(systemName: "50.circle"), for: .normal)
-        helpPhoneButton.setImage(UIImage(systemName: "phone"), for: .normal)
-        helpHumansButton.setImage(UIImage(systemName: "person.3.fill"), for: .normal)
-        
-        takeMoneyButton.setTitle("Забрать деньги", for: .normal)
-        takeMoneyButton.titleLabel?.font = UIFont(name: "Gilroy-Regular", size: 25)
+        takeMoneyButton.setBackgroundImage(UIImage(named: "Rectangle 3"), for: .normal)
+        takeMoneyButton.contentHorizontalAlignment = .center
         
         let topStack = UIStackView(views: [exitButton,
                                            questionNumberLabel,
                                            showProgressButton],
                                    axis: .horizontal,
-                                   spacing: 50)
+                                   spacing: 30)
         
         let helpButtonsStackView = UIStackView(views: [help5050Button,
                                                        helpPhoneButton,
                                                        helpHumansButton], 
                                                axis: .horizontal,
-                                               spacing: 30)
-        
+                                               spacing: 20)
         
         let answersButtonsStack = UIStackView(views: [buttonAnswerA,
                                                       buttonAnswerB,
                                                       buttonAnswerC,
                                                       buttonAnswerD],
                                               axis: .vertical,
-                                              spacing: 20)
+                                              spacing: 15)
         
         let mainStack = UIStackView(views: [topStack,
                                             sumTotalLabel,
                                             timerProgress,
                                             questionTextLabel,
                                             helpButtonsStackView,
-                                            answersButtonsStack],
+                                            answersButtonsStack,
+                                            takeMoneyButton,
+                                           ],
                                     axis: .vertical,
-                                    spacing: 10)
+                                    spacing: 15)
         addSubview(backgroundImage)
         addSubview(mainStack)
-        addSubview(takeMoneyButton)
         
         backgroundImage.translatesAutoresizingMaskIntoConstraints = false
-        mainStack.distribution = .equalSpacing
         mainStack.translatesAutoresizingMaskIntoConstraints = false
-        takeMoneyButton.translatesAutoresizingMaskIntoConstraints = false
         
         // MARK: - Constraints
         
@@ -107,68 +112,24 @@ class GameView: UIView {
             backgroundImage.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             mainStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-            mainStack.leftAnchor.constraint(equalTo: leftAnchor, constant: 20),
-            mainStack.centerXAnchor.constraint(equalTo: centerXAnchor),
+            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            mainStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            mainStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
             
             timerProgress.topAnchor.constraint(equalTo: sumTotalLabel.bottomAnchor, constant: 20),
             timerProgress.leadingAnchor.constraint(equalTo: mainStack.leadingAnchor),
             timerProgress.trailingAnchor.constraint(equalTo: mainStack.trailingAnchor),
             
-            questionTextLabel.heightAnchor.constraint(equalToConstant: 200),
-            
-            takeMoneyButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            takeMoneyButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            questionTextLabel.heightAnchor.constraint(equalToConstant: 170),
             
         ])
 
-        
-        
         
     }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-
-// MARK: - Extension UIElement
-
-extension UIStackView {
-    convenience init(views: [UIView], axis: NSLayoutConstraint.Axis, spacing: CGFloat, alignment: Alignment = .center) {
-        self.init(arrangedSubviews: views)
-        self.axis = axis
-        self.spacing = spacing
-        self.alignment = alignment
-    }
-}
-
-extension UILabel {
-    convenience init(text: String) {
-        self.init()
-        self.text = text
-        self.font = UIFont(name: "Gilroy-Regular", size: 25)
-        self.textColor = .white
-        self.numberOfLines = 0
-    }
-}
-
-extension UIButton {
-    convenience init(text: String) {
-        self.init()
-        self.setTitle(text, for: .normal)
-        self.contentHorizontalAlignment = .leading
-        self.tintColor = .white
-        self.titleLabel?.font = .boldSystemFont(ofSize: 25)
-        self.setBackgroundImage(UIImage(named: "Rectangle 1"), for: .normal)
-        self.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        self.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        self.translatesAutoresizingMaskIntoConstraints = false
-        //self.addTarget(self, action: #selector(buttonsTapped), for: .touchUpInside)
-        let inset: CGFloat = 15
-        self.titleEdgeInsets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: 0)
-    }
-}
-
 
 // MARK: - UI Build
 

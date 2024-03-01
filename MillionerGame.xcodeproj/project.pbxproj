@@ -34,6 +34,9 @@
 		BE0DCE2E2B8E1E5B00249D2E /* zvukChasov.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE0DCE292B8E1E5B00249D2E /* zvukChasov.mp3 */; };
 		BE0DCE2F2B8E1E5B00249D2E /* zvukNepravilnogo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BE0DCE2A2B8E1E5B00249D2E /* zvukNepravilnogo.mp3 */; };
 		BE0DCE312B90676400249D2E /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE302B90676400249D2E /* SoundManager.swift */; };
+		BE0DCE342B91C65300249D2E /* UIButtonExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE332B91C65300249D2E /* UIButtonExt.swift */; };
+		BE0DCE362B91C68400249D2E /* UIStackViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE352B91C68400249D2E /* UIStackViewExt.swift */; };
+		BE0DCE382B91D4D900249D2E /* UILabelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE372B91D4D900249D2E /* UILabelExt.swift */; };
 		CBCD61852B8D3E49005C8F54 /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCD61842B8D3E49005C8F54 /* ResultTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +70,9 @@
 		BE0DCE292B8E1E5B00249D2E /* zvukChasov.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zvukChasov.mp3; sourceTree = "<group>"; };
 		BE0DCE2A2B8E1E5B00249D2E /* zvukNepravilnogo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = zvukNepravilnogo.mp3; sourceTree = "<group>"; };
 		BE0DCE302B90676400249D2E /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		BE0DCE332B91C65300249D2E /* UIButtonExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExt.swift; sourceTree = "<group>"; };
+		BE0DCE352B91C68400249D2E /* UIStackViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExt.swift; sourceTree = "<group>"; };
+		BE0DCE372B91D4D900249D2E /* UILabelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExt.swift; sourceTree = "<group>"; };
 		CBCD61842B8D3E49005C8F54 /* ResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +111,7 @@
 				BE0DCDED2B8B6A2600249D2E /* View */,
 				BE0DCDEC2B8B6A1F00249D2E /* Controller */,
 				BE0DCDF42B8B8C4C00249D2E /* Sounds */,
+				BE0DCE322B91C62300249D2E /* Extension */,
 				BE0DCE012B8B8EDB00249D2E /* Fonts */,
 				BE0DCDEE2B8B6A3600249D2E /* Resources */,
 			);
@@ -189,6 +196,16 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		BE0DCE322B91C62300249D2E /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				BE0DCE332B91C65300249D2E /* UIButtonExt.swift */,
+				BE0DCE352B91C68400249D2E /* UIStackViewExt.swift */,
+				BE0DCE372B91D4D900249D2E /* UILabelExt.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -268,8 +285,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE0DCE192B8BC1A800249D2E /* RulesViewController.swift in Sources */,
+				BE0DCE342B91C65300249D2E /* UIButtonExt.swift in Sources */,
 				BE0DCE172B8BBE4A00249D2E /* GameOverView.swift in Sources */,
 				BE0DCE092B8BBCD700249D2E /* GameViewController.swift in Sources */,
+				BE0DCE382B91D4D900249D2E /* UILabelExt.swift in Sources */,
 				BE0DCDF12B8B6A8E00249D2E /* Question.swift in Sources */,
 				BE0DCDDA2B8B687D00249D2E /* StartViewController.swift in Sources */,
 				BE0DCE0B2B8BBCE000249D2E /* GameView.swift in Sources */,
@@ -281,6 +300,7 @@
 				CBCD61852B8D3E49005C8F54 /* ResultTableViewCell.swift in Sources */,
 				BE0DCE1B2B8BC1B300249D2E /* RulesView.swift in Sources */,
 				BE0DCE1F2B8D4ED500249D2E /* Quiz.swift in Sources */,
+				BE0DCE362B91C68400249D2E /* UIStackViewExt.swift in Sources */,
 				BE0DCE112B8BBD7900249D2E /* ResultView.swift in Sources */,
 				BE0DCE152B8BBE4100249D2E /* GameOverViewController.swift in Sources */,
 				BE0DCDEB2B8B69B400249D2E /* StartView.swift in Sources */,
