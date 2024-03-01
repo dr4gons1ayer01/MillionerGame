@@ -12,8 +12,8 @@ class GameOverViewController: UIViewController {
     private let gameVC = GameViewController()
     private let gameOverView: GameOverView
     
-    init(questionIndex: Int) {
-        gameOverView = GameOverView(questionIndex: questionIndex)
+    init(questionIndex: Int, tookMoney: Bool = false) {
+        gameOverView = GameOverView(questionIndex: questionIndex, tookMoney: tookMoney)
         super.init(nibName: nil, bundle: nil)
     }
     

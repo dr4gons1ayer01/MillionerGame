@@ -31,8 +31,8 @@ class ResultView: UIView, UITableViewDataSource {
             if Quiz.milestoneSums.contains(sortedSums.map { $0.value }[questionIndex]) && isCorrectAnswer {
                 Quiz.lastMilestone = sortedSums[questionIndex].value
             }
-            //Тут пока временно сделала автоматическое закрытие экрана результатов и перехода на следующий экран через 5 секунд (время проигрывания звука верного/неверного ответа)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
+            //Тут пока временно сделала автоматическое закрытие экрана результатов и перехода на следующий экран через 3 секунды (время проигрывания звука верного/неверного ответа)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
                 //Передаем в замыкание выхода с экрана результатов последнюю достигнутую несгораемую сумму, если она была достигнута. Для ее дальнейшей передачи и отображения на экране 'Game Over'
                 self?.nextVC?()
             }
