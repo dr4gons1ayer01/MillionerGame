@@ -27,10 +27,11 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view = mainView
+
         quiz.restartGame()
         
         answerButtonsTapped()
-        exitButtonTapped()
+        exitButton()
         showProgressButtonTapped()
         takeMoneyButtonTapped()
         
@@ -110,21 +111,7 @@ class GameViewController: UIViewController {
         mainView.buttonAnswerC.addAction(tap, for: .touchUpInside)
         mainView.buttonAnswerD.addAction(tap, for: .touchUpInside)
     }
-    
-    
-    func exitButtonTapped() {
-        let tap = UIAction { _ in
-            //TODO: -  По желанию можно алерт сделать
-            if let navigationController = self.navigationController {
-                navigationController.popViewController(animated: true)
-            } else {
-                self.dismiss(animated: true, completion: nil)
-            }
-            SoundManager.shared.stopSound()
-        }
-        mainView.exitButton.addAction(tap, for: .touchUpInside)
-    }
-    
+
     func showProgressButtonTapped() {
         let tap = UIAction { _ in
             print("show progress")
@@ -214,6 +201,36 @@ class GameViewController: UIViewController {
         }
         mainView.helpHumansButton.addAction(tap, for: .touchUpInside)
     }
+    func exitButton() {
+        let tap = UIAction { _ in
+            self.exitAlert() }
+        self.mainView.exitButton.addAction(tap, for: .touchUpInside)
+    }
+    
+    func exitAlert() {
+        let alert = UIAlertController(title: "Выход", message: "Вы хотите выйти?", preferredStyle: .alert)
+        
+        //если оставить один first?.subviews, будет некрасиво!
+        
+        alert.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor.init(red: 0.676261723, green: 0.6663312316, blue: 0.5041431785, alpha: 1)
+    
+        alert.view.layer.cornerRadius = 25
+        
+        let exitGame = UIAlertAction(title: "Выйти", style: .default) { _ in
+            if let navigationController = self.navigationController {
+                navigationController.popViewController(animated: true)
+            }
+            SoundManager.shared.stopSound()
+        }
+        
+        let returnGame = UIAlertAction(title: "Остаться", style: .cancel, handler: nil)
+        
+        alert.addAction(exitGame)
+        alert.addAction(returnGame)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     ///
     func normalColor() {
         self.mainView.buttonAnswerA.setBackgroundImage(UIImage(named: "Rectangle 1"), for: .normal)
