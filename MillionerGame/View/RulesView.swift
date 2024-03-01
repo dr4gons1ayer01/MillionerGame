@@ -9,9 +9,9 @@ import UIKit
 
 class RulesView: UIView {
     let backgroundImage = UIImageView(image: UIImage(named: "bg")!)
-    let logoLabel = UILabel()
+    let logoLabel = UILabel(text: "Правила игры")
     let rulesLabel = UITextView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-    let homeButton = UIButton(title: "Назад", bg: .systemGreen)
+    let homeButton = UIButton(text: "Назад", alignment: .center)
     
     init() {
         super.init(frame: CGRect())
@@ -21,24 +21,23 @@ class RulesView: UIView {
     func setupUI() {
         backgroundImage.contentMode = .scaleAspectFill
         
-        logoLabel.text = "Правила игры"
         logoLabel.font = UIFont(name: "Gilroy-Bold", size: 35)
-        logoLabel.textColor = .white
         logoLabel.textAlignment = .center
         
         rulesLabel.isScrollEnabled = true
         rulesLabel.text = rules
-        rulesLabel.font = UIFont(name: "Gilroy-Bold", size: 15)
+        rulesLabel.font = UIFont(name: "Gilroy-Bold", size: 17)
         rulesLabel.backgroundColor = .clear
         rulesLabel.textColor = .white
         rulesLabel.textAlignment = .natural
         rulesLabel.isEditable = false
         rulesLabel.showsVerticalScrollIndicator = false
         
-        let stack = UIStackView(arrangedSubviews: [logoLabel, rulesLabel, homeButton])
+        let stack = UIStackView(arrangedSubviews: [logoLabel, 
+                                                   rulesLabel,
+                                                   homeButton])
         stack.axis = .vertical
         stack.spacing = 3
-        
         
         addSubview(backgroundImage)
         addSubview(stack)
@@ -62,8 +61,6 @@ class RulesView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
-
 
 import SwiftUI
 
