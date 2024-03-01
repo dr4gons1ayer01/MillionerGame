@@ -71,11 +71,12 @@ class ResultViewController: UIViewController {
         guard let isCorrectAnswer else { return }
         ////Назначаем для вью логику перехода на другой экран по закрытию экрана с результатами в зависимости от правильности ответа
         resultView.nextVC = quitResults
-        if isCorrectAnswer {
-            SoundManager.shared.playSound(soundFileName: "otvetVernyiy")
-        } else {
-            SoundManager.shared.playSound(soundFileName: "zvukNepravilnogo")
-        }
+        //убираю чтобы музыка играла из гейм и добавил смену бегрануда кнопки с неправ ответом
+//        if isCorrectAnswer {
+//            SoundManager.shared.playSound(soundFileName: "otvetVernyiy")
+//        } else {
+//            SoundManager.shared.playSound(soundFileName: "zvukNepravilnogo")
+//        }
     }
     
 }

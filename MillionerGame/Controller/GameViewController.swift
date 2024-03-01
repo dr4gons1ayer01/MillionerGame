@@ -78,10 +78,15 @@ class GameViewController: UIViewController {
                 
                 print("Верный ответ!")
                 ///
+                /// подстветка зеленым при правильно ответе
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    
+                    SoundManager.shared.playSound(soundFileName: "otvetVernyiy")
+                    button.setBackgroundImage(UIImage(named: "Rectangle 3"), for: .normal)
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
                     self.updateQuestionAndSum()
-                    SoundManager.shared.stopSound()
+                    //SoundManager.shared.stopSound()
                     let vc = ResultViewController(questionNumber: self.quiz.currentQuestionNumber, isCorrectAnswer: true)
                     self.navigationController?.pushViewController(vc, animated: true)
                     button.setBackgroundImage(UIImage(named: "Rectangle 1"), for: .normal)
@@ -92,8 +97,14 @@ class GameViewController: UIViewController {
                 
                 print("Неверный ответ!")
                 ///
+                ///
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    SoundManager.shared.stopSound()
+                SoundManager.shared.playSound(soundFileName: "zvukNepravilnogo")
+                button.setBackgroundImage(UIImage(named: "Rectangle 5"), for: .normal)
+            }
+            
+                DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
+                    //SoundManager.shared.stopSound()
                     let vc = ResultViewController(questionNumber: self.quiz.currentQuestionNumber, isCorrectAnswer: false)
                     self.navigationController?.pushViewController(vc, animated: true)
                     button.setBackgroundImage(UIImage(named: "Rectangle 1"), for: .normal)
@@ -102,8 +113,9 @@ class GameViewController: UIViewController {
                 
             }
             ///сбрасываем таймер
-            self.secondPassed = 0
-            self.timer.invalidate()
+//            self.secondPassed = 0
+//            self.timer.invalidate()
+            self.stopTimer(stopSound: false)
         }
         mainView.buttonAnswerA.addAction(tap, for: .touchUpInside)
         mainView.buttonAnswerB.addAction(tap, for: .touchUpInside)
@@ -138,10 +150,8 @@ class GameViewController: UIViewController {
     func takeMoneyButtonTapped() {
         let tap = UIAction { _ in
             print("take money")
-            self.timer.invalidate()
             self.straightToGameOver()
-            SoundManager.shared.stopSound()
-            self.secondPassed = 0
+            self.stopTimer(stopSound: true)
         }
         
         mainView.takeMoneyButton.addAction(tap, for: .touchUpInside)
@@ -247,6 +257,16 @@ class GameViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    func stopTimer(stopSound: Bool) {
+        timer.invalidate()
+        secondPassed = 0
+        if stopSound == true {
+            SoundManager.shared.stopSound()
+        }
+    }
+    
 }
+
+
 
 

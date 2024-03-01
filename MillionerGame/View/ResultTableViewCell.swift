@@ -77,7 +77,7 @@ class ResultTableViewCell: UITableViewCell {
     
     ///Подсвечивает ячейку с текущим вопросом верно/неверно
     private func highlightQuestion(isCorrect: Bool) -> UIImage {
-        if isCorrect || didPass {
+        if isCorrect {
             return UIImage(imageLiteralResourceName: "Rectangle 3")
         } else {
             return UIImage(imageLiteralResourceName: "Rectangle 5")

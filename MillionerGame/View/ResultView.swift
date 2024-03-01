@@ -27,8 +27,9 @@ class ResultView: UIView, UITableViewDataSource {
         super.init(frame: .zero)
         //Сохраняем несгораемую сумму, если она была достигнута
         if let isCorrectAnswer {
-            if Quiz.milestoneSums.contains(Quiz.sums.map { $0.value }[questionIndex]) && isCorrectAnswer {
-                Quiz.lastMilestone = Quiz.sums[questionIndex]
+            let sortedSums = Quiz.sums.sorted { $0.key < $1.key }
+            if Quiz.milestoneSums.contains(sortedSums.map { $0.value }[questionIndex]) && isCorrectAnswer {
+                Quiz.lastMilestone = sortedSums[questionIndex].value
             }
             //Тут пока временно сделала автоматическое закрытие экрана результатов и перехода на следующий экран через 5 секунд (время проигрывания звука верного/неверного ответа)
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [weak self] in
