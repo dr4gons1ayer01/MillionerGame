@@ -25,7 +25,7 @@ class GameOverView: UIView {
     
     private var loseLabel: UILabel {
         let label = UILabel()
-        label.text = "Пройгрыш на \(questionIndex + 1) вопросе"
+        label.text = "Проигрыш на \(questionIndex + 1) вопросе"
         label.font = UIFont(name: "Gilroy-Bold", size: 20)
         label.textColor = .white
         return label
@@ -59,7 +59,8 @@ class GameOverView: UIView {
         
         //Проверяем, была ли достигнута несгораемая сумма, и в зависимости от этого показываем/не показываем текст с выигрышем и соответсвующим эмодзи
         if let milestone = milestone {
-            milestoneLabel.text = "Вы выйграли \(milestone)!"
+            milestoneLabel.text = "Вы выиграли \(milestone)!"
+            milestoneLabel.textColor = .white
             emojiLabel.text = "💰"
         } else {
             milestoneLabel.isHidden = true
@@ -68,9 +69,9 @@ class GameOverView: UIView {
         
         //UI если выиграл миллион
         if wonMillion {
-            gameOverLabel.text = "Congratulations!"
-            milestoneLabel.text = "You won 1 millon!"
-            loseLabel.text = "Answered all the questions!"
+            gameOverLabel.text = "Поздравляем!"
+            milestoneLabel.text = "Вы выиграли миллион!"
+            loseLabel.text = "Все вопросы отвечены верно"
         }
         
         let mainStack = UIStackView(views: [logo,
