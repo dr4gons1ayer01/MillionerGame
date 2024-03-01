@@ -46,9 +46,9 @@ class GameOverView: UIView {
         gameOverLabel.font = UIFont(name: "Gilroy-Bold", size: 38)
         emojiLabel.font = .systemFont(ofSize: 250)
         
-        loseLabel.font = UIFont(name: "Gilroy-Bold", size: 20)
+        milestoneLabel.font = UIFont(name: "Gilroy-Bold", size: 23)
+        loseLabel.font = UIFont(name: "Gilroy-Bold", size: 23)
         loseLabel.textColor = .white
-        loseLabel.font = UIFont(name: "Gilroy-Regular", size: 20)
         
         if tookMoney {
             loseLabel.text = "Взял деньги на \(questionIndex + 1) вопросе"
@@ -56,9 +56,7 @@ class GameOverView: UIView {
             loseLabel.text = "Проигрыш на \(questionIndex + 1) вопросе"
         }
         
-        
         restartButton.setBackgroundImage(UIImage(named: "Rectangle 3"), for: .normal)
-        ///нажатие я бы в контроллер убрал
         restartButton.addTarget(self, action: #selector(restartTapped), for: .touchUpInside)
         
         //Проверяем, была ли достигнута несгораемая сумма, и в зависимости от этого показываем/не показываем текст с выигрышем и соответсвующим эмодзи
@@ -111,25 +109,6 @@ class GameOverView: UIView {
             mainStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             mainStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
             
-//            logo.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-//            logo.centerXAnchor.constraint(equalTo: centerXAnchor),
-//            logo.widthAnchor.constraint(equalToConstant: 180),
-//            logo.heightAnchor.constraint(equalTo: logo.widthAnchor),
-//            gameOverLabel.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 20),
-//            gameOverLabel.leadingAnchor.constraint(equalTo: background.leadingAnchor, constant: 34),
-//            gameOverLabel.trailingAnchor.constraint(equalTo: background.trailingAnchor, constant: -34),
-//            milestoneLabel.topAnchor.constraint(equalTo: gameOverLabel.bottomAnchor, constant: 10),
-//            milestoneLabel.leadingAnchor.constraint(equalTo: gameOverLabel.leadingAnchor),
-//            milestoneLabel.trailingAnchor.constraint(equalTo: gameOverLabel.trailingAnchor),
-//            emojiLabel.topAnchor.constraint(equalTo: milestoneLabel.bottomAnchor, constant: 10),
-//            emojiLabel.leadingAnchor.constraint(equalTo: milestoneLabel.leadingAnchor),
-//            emojiLabel.trailingAnchor.constraint(equalTo: milestoneLabel.trailingAnchor),
-//            restartButton.leadingAnchor.constraint(equalTo: background.leadingAnchor, constant: 20),
-//            restartButton.trailingAnchor.constraint(equalTo: background.trailingAnchor, constant: -20),
-//            restartButton.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor),
-//            loseLabel.bottomAnchor.constraint(equalTo: restartButton.topAnchor, constant: -10),
-//            loseLabel.leadingAnchor.constraint(equalTo: emojiLabel.leadingAnchor),
-//            loseLabel.trailingAnchor.constraint(equalTo: emojiLabel.trailingAnchor)
         ])
     }
     required init?(coder: NSCoder) {

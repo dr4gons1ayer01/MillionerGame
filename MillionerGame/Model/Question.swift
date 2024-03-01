@@ -13,3 +13,6 @@ struct Question {
     let correctAnswerIndex: Int
 }
 
+struct Answer {
+    let text: String
+}

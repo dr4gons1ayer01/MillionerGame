@@ -32,3 +32,12 @@ extension UIButton {
         self.heightAnchor.constraint(equalToConstant: height).isActive = true
     }
 }
+///расширение на алерт 
+extension UIButton {
+    convenience init(title: String, backgroundImage: UIImage?) {
+        self.init()
+        setTitle(title, for: .normal)
+        titleLabel?.font = UIFont(name: "Gilroy-Regular", size: 25)
+        setBackgroundImage(backgroundImage, for: .normal)
+    }
+}

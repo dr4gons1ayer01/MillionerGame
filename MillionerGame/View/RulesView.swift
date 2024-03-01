@@ -24,13 +24,10 @@ class RulesView: UIView {
         logoLabel.font = UIFont(name: "Gilroy-Bold", size: 35)
         logoLabel.textAlignment = .center
         
-        rulesLabel.isScrollEnabled = true
         rulesLabel.text = rules
         rulesLabel.font = UIFont(name: "Gilroy-Bold", size: 17)
         rulesLabel.backgroundColor = .clear
         rulesLabel.textColor = .white
-        rulesLabel.textAlignment = .natural
-        rulesLabel.isEditable = false
         rulesLabel.showsVerticalScrollIndicator = false
         
         let stack = UIStackView(arrangedSubviews: [logoLabel, 
