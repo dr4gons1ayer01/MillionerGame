@@ -37,6 +37,7 @@
 		BE0DCE342B91C65300249D2E /* UIButtonExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE332B91C65300249D2E /* UIButtonExt.swift */; };
 		BE0DCE362B91C68400249D2E /* UIStackViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE352B91C68400249D2E /* UIStackViewExt.swift */; };
 		BE0DCE382B91D4D900249D2E /* UILabelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0DCE372B91D4D900249D2E /* UILabelExt.swift */; };
+		CB7B1FD42B91EE4A00EEEF69 /* budilnik.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = CB7B1FD32B91EE4900EEEF69 /* budilnik.mp3 */; };
 		CBCD61852B8D3E49005C8F54 /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBCD61842B8D3E49005C8F54 /* ResultTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		BE0DCE332B91C65300249D2E /* UIButtonExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExt.swift; sourceTree = "<group>"; };
 		BE0DCE352B91C68400249D2E /* UIStackViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackViewExt.swift; sourceTree = "<group>"; };
 		BE0DCE372B91D4D900249D2E /* UILabelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExt.swift; sourceTree = "<group>"; };
+		CB7B1FD32B91EE4900EEEF69 /* budilnik.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = budilnik.mp3; sourceTree = "<group>"; };
 		CBCD61842B8D3E49005C8F54 /* ResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +184,7 @@
 				BE0DCE282B8E1E5B00249D2E /* otvetVernyiy.mp3 */,
 				BE0DCE292B8E1E5B00249D2E /* zvukChasov.mp3 */,
 				BE0DCE2A2B8E1E5B00249D2E /* zvukNepravilnogo.mp3 */,
+				CB7B1FD32B91EE4900EEEF69 /* budilnik.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 				BE0DCE052B8BB47800249D2E /* Gilroy-Lightitalic.ttf in Resources */,
 				BE0DCE2D2B8E1E5B00249D2E /* otvetVernyiy.mp3 in Resources */,
 				BE0DCE072B8BB47800249D2E /* Gilroy-Regular.ttf in Resources */,
+				CB7B1FD42B91EE4A00EEEF69 /* budilnik.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
