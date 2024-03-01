@@ -9,6 +9,7 @@ import UIKit
 
 class GameOverViewController: UIViewController {
     
+    private let gameVC = GameViewController()
     private let gameOverView: GameOverView
     
     init(questionIndex: Int) {
@@ -22,6 +23,7 @@ class GameOverViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        gameVC.stopTimer(stopSound: true)
         navigationController?.navigationBar.isHidden = true
         //Назначаем действие для вью по нажатию кнопки рестарт
         gameOverView.onTap = restart
