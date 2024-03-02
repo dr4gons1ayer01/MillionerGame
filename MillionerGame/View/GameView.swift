@@ -24,7 +24,7 @@ class GameView: UIView {
     let help5050Button = UIButton(imageNamed: "5050", width: 80, height: 65)
     let helpPhoneButton = UIButton(imageNamed: "call", width: 80, height: 65)
     let helpHumansButton = UIButton(imageNamed: "people", width: 80, height: 65)
-    let helpMistakeButton = UIButton(imageNamed: "mistake", width: 80, height: 65)
+    let helpMistakeButton = UIButton(imageNamed: "mistakenew", width: 80, height: 65)
     
     let buttonAnswerA = UIButton(text: "A: Answer One", alignment: .leading)
     let buttonAnswerB = UIButton(text: "B: Answer Two", alignment: .leading)

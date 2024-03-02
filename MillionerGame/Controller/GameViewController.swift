@@ -233,7 +233,7 @@ class GameViewController: UIViewController {
             self.mainView.buttonAnswerC.removeTarget(nil, action: nil, for: .allEvents)
             self.mainView.buttonAnswerD.removeTarget(nil, action: nil, for: .allEvents)
 
-            button.setImage(UIImage(named: "mistake_off"), for: .normal)
+            button.setImage(UIImage(named: "mistakenew_off"), for: .normal)
             button.isEnabled = false
             self.heplMistakeButtonLogic()
         }
