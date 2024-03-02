@@ -30,7 +30,7 @@ class GameOverView: UIView {
     init(questionIndex: Int, tookMoney: Bool) {
         self.questionIndex = questionIndex
         self.milestone = Quiz.lastMilestone
-        self.wonMillion = {Quiz.lastMilestone == "1 миллион"}()
+        self.wonMillion = {Quiz.lastMilestone == Quiz.milestoneSums.last}()
         self.tookMoney = tookMoney
         super.init(frame: .zero)
         setupUI()
@@ -79,6 +79,7 @@ class GameOverView: UIView {
             gameOverLabel.text = "Поздравляем!"
             milestoneLabel.text = "Вы выиграли миллион!"
             loseLabel.text = "Все вопросы отвечены верно"
+            
         }
         
         let mainStack = UIStackView(views: [logo,
