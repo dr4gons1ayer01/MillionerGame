@@ -38,7 +38,7 @@ class GameViewController: UIViewController {
         helpPhoneButton()
         helpHumansButton()
         
-        //        help2Botton()
+        help2Botton()
         
     }
     // MARK: - Обновление UI и обработчики нажатия
@@ -303,102 +303,103 @@ class GameViewController: UIViewController {
                           animations: { button.setBackgroundImage(.rectangle4, for: .normal) },
                           completion: nil)
     }
-}
-//    //обработчик нажатия кнопки
-//    func help2Botton() {
-//        let tap = UIAction { action in
-//            guard let button = action.sender as? UIButton else { return }
-//
-//
-//
-//            self.mainView.buttonAnswerA.removeTarget(nil, action: nil, for: .allEvents)
-//            self.mainView.buttonAnswerB.removeTarget(nil, action: nil, for: .allEvents)
-//            self.mainView.buttonAnswerC.removeTarget(nil, action: nil, for: .allEvents)
-//            self.mainView.buttonAnswerD.removeTarget(nil, action: nil, for: .allEvents)
-//
-//            button.setImage(UIImage(named: "mistake_off"), for: .normal)
-//            button.isEnabled = false
-//            self.hepl2ButtonLogic()
-//        }
-//        mainView.help2Button.addAction(tap, for: .touchUpInside)
-//    }
-//    //логика работы кнопки
-//    func hepl2ButtonLogic() {
-//
-//        let tap = UIAction { action in
-//            guard let button = action.sender as? UIButton else { return }
-//            let arrayOfButtons = [self.mainView.buttonAnswerA, self.mainView.buttonAnswerB, self.mainView.buttonAnswerC, self.mainView.buttonAnswerD]
-//
-//            let answerIndex: Int
-//            switch button {
-//            case self.mainView.buttonAnswerA:
-//                answerIndex = 0
-//            case self.mainView.buttonAnswerB:
-//                answerIndex = 1
-//            case self.mainView.buttonAnswerC:
-//                answerIndex = 2
-//            case self.mainView.buttonAnswerD:
-//                answerIndex = 3
-//            default:
-//                return
-//            }
-//            print("ret")
-//
-//            let indexOfRight = self.quiz.getRightAnswerIndex()
-//
-//                if answerIndex == indexOfRight {
-//                    self.answerHelp2Button(index: answerIndex)
-//                    print("right")
-//                    self.secondPassed = 0
-//                    self.timer.invalidate()
-//                }
-//                else {
-//                    print("fkjllkf")
-//                    arrayOfButtons[answerIndex].setBackgroundImage(UIImage(named: "Rectangle 5"), for: .normal)
-//                    self.mainView.buttonAnswerA.removeTarget(nil, action: nil, for: .allEvents)
-//                    self.mainView.buttonAnswerB.removeTarget(nil, action: nil, for: .allEvents)
-//                    self.mainView.buttonAnswerC.removeTarget(nil, action: nil, for: .allEvents)
-//                    self.mainView.buttonAnswerD.removeTarget(nil, action: nil, for: .allEvents)
-//                    self.answerButtonsTapped()
-//                }
-//
-//        }
-//
-//        self.mainView.buttonAnswerA.addAction(tap, for: .touchUpInside)
-//        self.mainView.buttonAnswerB.addAction(tap, for: .touchUpInside)
-//        self.mainView.buttonAnswerC.addAction(tap, for: .touchUpInside)
-//        self.mainView.buttonAnswerD.addAction(tap, for: .touchUpInside)
-//
-//    }
-//    //функция для проверки ответа при нажатой кнопке право на ошибку
-//     func answerHelp2Button(index: Int) {
-//         print("ans")
-//
-//         let arrayOfButtons = [self.mainView.buttonAnswerA, self.mainView.buttonAnswerB, self.mainView.buttonAnswerC, self.mainView.buttonAnswerD]
-//         arrayOfButtons[index].setBackgroundImage(UIImage(named: "Rectangle 4"), for: .normal)
-//         let isCorrectAnswer = self.quiz.checkAnswer(index)
-//         if isCorrectAnswer {
-//            
-//             print("Верный ответ!")
-//             /// подстветка зеленым при правильно ответе
-//             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//                 SoundManager.shared.playSound(soundFileName: "otvetVernyiy")
-//                 arrayOfButtons[index].setBackgroundImage(UIImage(named: "Rectangle 3"), for: .normal)
-//             }
-//            
-//             DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
-//                 self.updateQuestionAndSum()
-//                 //SoundManager.shared.stopSound()
-//                 let vc = ResultViewController(questionNumber: self.quiz.currentQuestionNumber, isCorrectAnswer: true)
-//                 self.navigationController?.pushViewController(vc, animated: true)
-//                 arrayOfButtons[index].setBackgroundImage(UIImage(named: "Rectangle 1"), for: .normal)
-//             }
-//             SoundManager.shared.playSound(soundFileName: "otvetPrinyat")
-//                  
-//         }
-//         self.stopTimer(stopSound: false)
-//     }
+    // MARK: - четвертая кнопка
+    ///четвертая кнопка
+    //обработчик нажатия кнопки
+    func help2Botton() {
+        let tap = UIAction { action in
+            guard let button = action.sender as? UIButton else { return }
+
+
+
+            self.mainView.buttonAnswerA.removeTarget(nil, action: nil, for: .allEvents)
+            self.mainView.buttonAnswerB.removeTarget(nil, action: nil, for: .allEvents)
+            self.mainView.buttonAnswerC.removeTarget(nil, action: nil, for: .allEvents)
+            self.mainView.buttonAnswerD.removeTarget(nil, action: nil, for: .allEvents)
+
+            button.setImage(UIImage(named: "mistake_off"), for: .normal)
+            button.isEnabled = false
+            self.hepl2ButtonLogic()
+        }
+        mainView.help2Button.addAction(tap, for: .touchUpInside)
+    }
+    //логика работы кнопки
+    func hepl2ButtonLogic() {
+
+        let tap = UIAction { action in
+            guard let button = action.sender as? UIButton else { return }
+            let arrayOfButtons = [self.mainView.buttonAnswerA, self.mainView.buttonAnswerB, self.mainView.buttonAnswerC, self.mainView.buttonAnswerD]
+
+            let answerIndex: Int
+            switch button {
+            case self.mainView.buttonAnswerA:
+                answerIndex = 0
+            case self.mainView.buttonAnswerB:
+                answerIndex = 1
+            case self.mainView.buttonAnswerC:
+                answerIndex = 2
+            case self.mainView.buttonAnswerD:
+                answerIndex = 3
+            default:
+                return
+            }
+            print("ret")
+
+            let indexOfRight = self.quiz.getRightAnswerIndex()
+
+                if answerIndex == indexOfRight {
+                    self.answerHelp2Button(index: answerIndex)
+                    print("right")
+                    self.secondPassed = 0
+                    self.timer.invalidate()
+                }
+                else {
+                    print("fkjllkf")
+                    arrayOfButtons[answerIndex].setBackgroundImage(UIImage(named: "Rectangle 5"), for: .normal)
+                    self.mainView.buttonAnswerA.removeTarget(nil, action: nil, for: .allEvents)
+                    self.mainView.buttonAnswerB.removeTarget(nil, action: nil, for: .allEvents)
+                    self.mainView.buttonAnswerC.removeTarget(nil, action: nil, for: .allEvents)
+                    self.mainView.buttonAnswerD.removeTarget(nil, action: nil, for: .allEvents)
+                    self.answerButtonsTapped()
+                }
+
+        }
+
+        self.mainView.buttonAnswerA.addAction(tap, for: .touchUpInside)
+        self.mainView.buttonAnswerB.addAction(tap, for: .touchUpInside)
+        self.mainView.buttonAnswerC.addAction(tap, for: .touchUpInside)
+        self.mainView.buttonAnswerD.addAction(tap, for: .touchUpInside)
+
+    }
+    //функция для проверки ответа при нажатой кнопке право на ошибку
+     func answerHelp2Button(index: Int) {
+         print("ans")
+
+         let arrayOfButtons = [self.mainView.buttonAnswerA, self.mainView.buttonAnswerB, self.mainView.buttonAnswerC, self.mainView.buttonAnswerD]
+         arrayOfButtons[index].setBackgroundImage(UIImage(named: "Rectangle 4"), for: .normal)
+         let isCorrectAnswer = self.quiz.checkAnswer(index)
+         if isCorrectAnswer {
+            
+             print("Верный ответ!")
+             /// подстветка зеленым при правильно ответе
+             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                 SoundManager.shared.playSound(soundFileName: "otvetVernyiy")
+                 arrayOfButtons[index].setBackgroundImage(UIImage(named: "Rectangle 3"), for: .normal)
+             }
+            
+             DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
+                 self.updateQuestionAndSum()
+                 //SoundManager.shared.stopSound()
+                 let vc = ResultViewController(questionNumber: self.quiz.currentQuestionNumber, isCorrectAnswer: true)
+                 self.navigationController?.pushViewController(vc, animated: true)
+                 arrayOfButtons[index].setBackgroundImage(UIImage(named: "Rectangle 1"), for: .normal)
+             }
+             SoundManager.shared.playSound(soundFileName: "otvetPrinyat")
+                  
+         }
+         self.stopTimer(stopSound: false)
+     }
     
-//}
+}
 
 

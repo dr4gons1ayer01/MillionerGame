@@ -21,10 +21,10 @@ class GameView: UIView {
     
     let timerProgress = UIProgressView()
     
-    let help5050Button = UIButton(imageNamed: "5050", width: 90, height: 70)
-    let helpPhoneButton = UIButton(imageNamed: "call", width: 90, height: 70)
-    let helpHumansButton = UIButton(imageNamed: "people", width: 90, height: 70)
-//    let help2Button = UIButton(imageNamed: "mistake", width: 90, height: 70)
+    let help5050Button = UIButton(imageNamed: "5050", width: 80, height: 65)
+    let helpPhoneButton = UIButton(imageNamed: "call", width: 80, height: 65)
+    let helpHumansButton = UIButton(imageNamed: "people", width: 80, height: 65)
+    let help2Button = UIButton(imageNamed: "mistake", width: 80, height: 65)
     
     let buttonAnswerA = UIButton(text: "A: Answer One", alignment: .leading)
     let buttonAnswerB = UIButton(text: "B: Answer Two", alignment: .leading)
@@ -70,11 +70,11 @@ class GameView: UIView {
         
         let helpButtonsStackView = UIStackView(views: [help5050Button,
                                                        helpPhoneButton,
-//                                                       help2Button, 
-                                                       helpHumansButton
+                                                       helpHumansButton,
+                                                       help2Button,
                                             ],
                                                axis: .horizontal,
-                                               spacing: 20)
+                                               spacing: 12)
         
         let answersButtonsStack = UIStackView(views: [buttonAnswerA,
                                                       buttonAnswerB,
@@ -109,8 +109,8 @@ class GameView: UIView {
             backgroundImage.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             mainStack.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            mainStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            mainStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
+            mainStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
             mainStack.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -30),
             
             timerProgress.topAnchor.constraint(equalTo: sumTotalLabel.bottomAnchor, constant: 20),
