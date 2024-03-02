@@ -34,4 +34,15 @@ class GameOverViewController: UIViewController {
         print("возврат на начальный экран, рестарт игры")
         navigationController?.popToRootViewController(animated: true)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        SoundManager.shared.stopSound()
+        SoundManager.shared.playSound(soundFileName: "boleeKachestvennyiy")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        SoundManager.shared.stopSound()
+    }
 }

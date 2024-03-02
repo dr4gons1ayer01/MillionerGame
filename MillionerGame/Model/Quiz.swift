@@ -47,7 +47,7 @@ struct Quiz {
                                                        answers: [Answer(text: "Ледовое побоище"), Answer(text: "Чесменский бой"), Answer(text: "Полтавская битва"), Answer(text: "Взятие Измаила")], correctAnswerIndex: 3),
                                  Question(questionText: "451 градус по Фаренгейту — это сколько в Цельсиях?",
                                                        answers: [Answer(text: "232,78"), Answer(text: "100"), Answer(text: "327,93"), Answer(text: "143,86")], correctAnswerIndex: 0),
-                                 Question(questionText: "Кто из этих литературных героев существовал на самом деле??",
+                                 Question(questionText: "Кто из этих литературных героев существовал на самом деле?",
                                                        answers: [Answer(text: "Василий Теркин"), Answer(text: "Козьма Прутков"), Answer(text: "Вещий Олег"), Answer(text: "Остап Бендер")], correctAnswerIndex: 2),
                                  Question(questionText: "Какое государство самое маленькое в мире?",
                                                        answers: [Answer(text: "Мальта"), Answer(text: "Ватикан"), Answer(text: "Тувалу"), Answer(text: "Монако")], correctAnswerIndex: 1)]

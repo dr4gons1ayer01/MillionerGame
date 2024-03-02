@@ -48,7 +48,9 @@ class GameViewController: UIViewController {
         mainView.buttonAnswerD.setTitle(quiz.getAnswers()[3], for: .normal)
         normalColor()
         mainView.questionNumberLabel.text = "Вопрос \(quiz.currentQuestionNumber)/\(Quiz.sums.count)"
-        mainView.sumTotalLabel.text = Quiz.sums[quiz.currentQuestionNumber]!
+        if let currentSum = Quiz.sums[quiz.currentQuestionNumber] {
+            mainView.sumTotalLabel.text = currentSum
+        }
     }
     ///
     func answerButtonsTapped() {
@@ -56,7 +58,7 @@ class GameViewController: UIViewController {
             
             guard let button = action.sender as? UIButton else { return }
             ///смена цвета при выборе ответа
-            button.setBackgroundImage(UIImage(named: "Rectangle 4"), for: .normal)
+            self.animateWait(button: button)
             self.updateTimer()
             
             let answerIndex: Int
@@ -78,10 +80,7 @@ class GameViewController: UIViewController {
                 
                 print("Верный ответ!")
                 /// подстветка зеленым при правильно ответе
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    SoundManager.shared.playSound(soundFileName: "otvetVernyiy")
-                    button.setBackgroundImage(UIImage(named: "Rectangle 3"), for: .normal)
-                }
+                self.animateAnswer(button: button, iscorrect: true)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
                     self.updateQuestionAndSum()
@@ -95,11 +94,7 @@ class GameViewController: UIViewController {
             } else {
                 
                 print("Неверный ответ!")
-                ///
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    SoundManager.shared.playSound(soundFileName: "zvukNepravilnogo")
-                    button.setBackgroundImage(UIImage(named: "Rectangle 5"), for: .normal)
-                }
+                self.animateAnswer(button: button, iscorrect: false)
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 7) {
                     //SoundManager.shared.stopSound()
@@ -262,6 +257,44 @@ class GameViewController: UIViewController {
         if stopSound == true {
             SoundManager.shared.stopSound()
         }
+    }
+    
+    func animateAnswer(button: UIButton, iscorrect: Bool) {
+        let buttonColor: UIImage
+        let soundName: String
+        if iscorrect {
+            buttonColor = UIImage.rectangle3
+            soundName = "otvetVernyiy"
+        } else {
+            buttonColor = UIImage.rectangle5
+            soundName = "zvukNepravilnogo"
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            SoundManager.shared.playSound(soundFileName: soundName)
+            UIView.transition(with: button,
+                              duration: 0.5,
+                              options: [.repeat],
+                              animations: { button.setBackgroundImage(buttonColor, for: .normal) },
+                              completion: {(bool) in
+                UIView.transition(with: button,
+                                  duration: 0.5,
+                                  options: [.transitionCrossDissolve, .repeat],
+                                  animations: { button.setBackgroundImage(UIImage(named: "Rectangle 4"), for: .normal) },
+                                  completion: nil)
+            })
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.1 , execute: {
+                button.layer.removeAllAnimations()
+                button.setBackgroundImage(buttonColor, for: .normal)
+            })
+        }
+    }
+    
+    func animateWait(button: UIButton) {
+            UIView.transition(with: button,
+                              duration: 1.5,
+                              options: [.allowAnimatedContent, .transitionCrossDissolve],
+                              animations: { button.setBackgroundImage(.rectangle4, for: .normal) },
+                              completion: nil)
     }
     
 }

@@ -83,7 +83,7 @@ class ResultView: UIView, UITableViewDataSource {
             tableView.leadingAnchor.constraint(equalTo: background.leadingAnchor, constant: 34),
             tableView.trailingAnchor.constraint(equalTo: background.trailingAnchor, constant: -34),
             tableView.bottomAnchor.constraint(equalTo: background.bottomAnchor, constant: -34),
-            exitButton.topAnchor.constraint(equalTo: logo.topAnchor),
+            exitButton.topAnchor.constraint(equalTo: logo.topAnchor, constant: 20),
             exitButton.trailingAnchor.constraint(equalTo: tableView.trailingAnchor)
         ])
         
