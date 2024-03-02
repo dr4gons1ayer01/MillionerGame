@@ -22,9 +22,9 @@ class GameView: UIView {
     let timerProgress = UIProgressView()
     
     let help5050Button = UIButton(imageNamed: "5050", width: 90, height: 70)
-//    let helpPhoneButton = UIButton(imageNamed: "call", width: 90, height: 70)
+    let helpPhoneButton = UIButton(imageNamed: "call", width: 90, height: 70)
     let helpHumansButton = UIButton(imageNamed: "people", width: 90, height: 70)
-    let help2Button = UIButton(imageNamed: "mistake", width: 90, height: 70)
+//    let help2Button = UIButton(imageNamed: "mistake", width: 90, height: 70)
     
     let buttonAnswerA = UIButton(text: "A: Answer One", alignment: .leading)
     let buttonAnswerB = UIButton(text: "B: Answer Two", alignment: .leading)
@@ -69,8 +69,9 @@ class GameView: UIView {
                                    spacing: 44)
         
         let helpButtonsStackView = UIStackView(views: [help5050Button,
-                                                       /*helpPhoneButton*/
-                                                       help2Button, helpHumansButton
+                                                       helpPhoneButton,
+//                                                       help2Button, 
+                                                       helpHumansButton
                                             ],
                                                axis: .horizontal,
                                                spacing: 20)
